@@ -241,7 +241,7 @@ html, body, * {
   margin-bottom: 20px;
 }
 
-/* Single horizontal row — 8 cards in one line */
+/* Single horizontal row — 7 cards in one line */
 #df-sectors-section .df-sectors-grid {
   display: flex;
   flex-direction: row;

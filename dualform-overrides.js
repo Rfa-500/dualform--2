@@ -127,14 +127,13 @@
   }
 
   /* ─────────────────────────────────────────────────────────
-     3. SECTOR CARDS — New 8-card uniform section
+     3. SECTOR CARDS — New 7-card uniform section
         Replaces legacy LinksSection tiles entirely
   ───────────────────────────────────────────────────────── */
 
   var SECTOR_CARDS = [
     { name: 'Ingeniería',             img: 'Ingeniería.png' },
     { name: 'Prototipado',            img: 'Prototipado.png' },
-    { name: 'Mantenimiento',          img: 'Mantenimiento.png' },
     { name: 'Piezas funcionales',     img: 'Piezas funcionales.png' },
     { name: 'Fabricación',            img: 'Fabricación.png' },
     { name: 'Moldes',                 img: 'Moldes.png' },
@@ -736,6 +735,8 @@
         +'<div class="df-ft-col"><h4>Contacto</h4><ul>'
           +'<li><a href="'+ftPfx+'contacto/">Solicitar cotizaci\u00f3n</a></li>'
           +'<li><a href="'+ftPfx+'contacto/">Soporte t\u00e9cnico</a></li>'
+          +'<li><span>Dualformindustries@gmail.com</span></li>'
+          +'<li><span>+507 63063129</span></li>'
           +'<li><span>contacto@dualform.mx</span></li>'
           +'<li><span>+52 (55) 0000-0000</span></li>'
         +'</ul></div>'
