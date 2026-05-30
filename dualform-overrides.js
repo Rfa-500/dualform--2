@@ -1,6 +1,15 @@
 (function () {
   'use strict';
 
+  function getSiteRoot() {
+    if (window.location.protocol !== 'file:') return '/';
+
+    var script = document.currentScript || document.querySelector('script[src*="dualform-overrides.js"]');
+    var src = script ? script.getAttribute('src') || '' : '';
+    var cleanSrc = src.split('?')[0];
+    if (cleanSrc && cleanSrc.indexOf('/') !== -1) return cleanSrc.slice(0, cleanSrc.lastIndexOf('/') + 1);
+    return './';
+  }
   /* ─────────────────────────────────────────────────────────
      HELPERS
   ───────────────────────────────────────────────────────── */
@@ -97,7 +106,7 @@
         });
       } else if (/contact\s+sales/i.test(txt)) {
         (sp || a).textContent = 'Solicitar cotizaci\u00f3n';
-        a.href = 'contacto/index.html';
+        a.href = getSiteRoot() + 'contacto/';
         // Premium glass/outline button
         var baseStyleGlass = 'display:inline-flex;align-items:center;gap:7px;padding:10px 22px;background:rgba(255,255,255,0.08);color:#fff;font-weight:600;font-size:0.85rem;letter-spacing:0.04em;text-transform:uppercase;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform 0.18s ease,background 0.18s ease,border-color 0.18s ease,box-shadow 0.18s ease;margin-top:8px;';
         a.style.cssText = baseStyleGlass;
@@ -177,42 +186,42 @@
       {
         title: 'Impresión 3D',
         desc:  'Fabricación de piezas en plástico de alta precisión usando FDM, SLA y SLS. Ideal para prototipos y piezas funcionales.',
-        href:  'impresion-3d/index.html',
+        href:  getSiteRoot() + 'impresion-3d/',
         img:   'Resources-Img-Vid/Extra/Impresi\u00f3n 3D FDM.png',
         icon:  '<path d="M6 9V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><rect x="2" y="9" width="20" height="13" rx="2"/><line x1="12" y1="13" x2="12" y2="19"/>'
       },
       {
         title: 'Inyección de Plástico',
         desc:  'Producción de piezas plásticas en volúmenes medianos y altos con excelente acabado superficial y repetibilidad.',
-        href:  'inyeccion-de-plastico/index.html',
+        href:  getSiteRoot() + 'inyeccion-de-plastico/',
         img:   'Resources-Img-Vid/Extra/Inyeccion de plastico.png',
         icon:  '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>'
       },
       {
         title: 'Dise\u00f1o 3D',
         desc:  'Modelado CAD profesional y dise\u00f1o orientado a manufactura (DFM). Del concepto al archivo listo para producci\u00f3n.',
-        href:  'servicios/index.html',
+        href:  getSiteRoot() + 'servicios/',
         img:   '',
         icon:  '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
       },
       {
         title: 'Prototipado R\u00e1pido',
         desc:  'Del concepto al prototipo f\u00edsico en horas. Validamos forma, ajuste y funci\u00f3n antes de comprometerte con herramienta.',
-        href:  'servicios/index.html',
+        href:  getSiteRoot() + 'servicios/',
         img:   'Resources-Img-Vid/Extra/Prototipo.png',
         icon:  '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
       },
       {
         title: 'Piezas Funcionales',
         desc:  'Producci\u00f3n de piezas listas para uso final con los materiales y procesos \u00f3ptimos para cada aplicaci\u00f3n industrial.',
-        href:  'servicios/index.html',
+        href:  getSiteRoot() + 'servicios/',
         img:   'Resources-Img-Vid/Extra/Pieza final.png',
         icon:  '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/>'
       },
       {
         title: 'Selecci\u00f3n de Materiales',
         desc:  'Asesor\u00eda en la elecci\u00f3n del material \u00f3ptimo seg\u00fan requerimientos mec\u00e1nicos, t\u00e9rmicos, qu\u00edmicos o est\u00e9ticos.',
-        href:  'servicios/index.html',
+        href:  getSiteRoot() + 'servicios/',
         img:   'Resources-Img-Vid/Extra/Materiales.png',
         icon:  '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'
       }
@@ -396,8 +405,8 @@
     var anchor = document.getElementById('df-servicios-section');
 
     var cards = [
-      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'Resources-Img-Vid/Machines%20good/3d%20final.png', icon:ICON.printer, href:'impresion-3d/index.html' },
-      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png', icon:ICON.layers, href:'inyeccion-de-plastico/index.html' }
+      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'Resources-Img-Vid/Machines%20good/3d%20final.png', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
+      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
     ];
 
     var cardsHTML = cards.map(function(c) {
@@ -641,14 +650,7 @@
     if (document.getElementById('df-cta-contact')) return;
     var anchor = document.getElementById('df-nuestras-tech');
 
-    // Build root-relative CTA link path
-    var ctaHref = (function(){
-      var p = window.location.pathname.split('/');
-      var fi = p.indexOf('formlabs.com');
-      var d = fi !== -1 ? p.length - fi - 2 : 0;
-      var pfx = ''; for(var i=0;i<d;i++) pfx+='../';
-      return (pfx||'') + 'contacto/index.html';
-    })();
+    var ctaHref = getSiteRoot() + 'contacto/';
 
     var sec = document.createElement('div');
     sec.id = 'df-cta-contact';
@@ -698,14 +700,7 @@
       f.classList.add('df-hide-legacy');
     });
 
-    // Build root-relative footer link prefix
-    var ftPfx = (function(){
-      var p = window.location.pathname.split('/');
-      var fi = p.indexOf('formlabs.com');
-      var d = fi !== -1 ? p.length - fi - 2 : 0;
-      var pfx = ''; for(var i=0;i<d;i++) pfx+='../';
-      return pfx;
-    })();
+    var ftPfx = getSiteRoot();
 
     var yr = new Date().getFullYear();
     var footer = document.createElement('footer');
@@ -714,7 +709,7 @@
       +'<div class="df-ft-top">'
         // ── Brand column ──────────────────────────────────────────────────────
         +'<div class="df-ft-brand">'
-          +'<a class="df-ft-logo" href="'+ftPfx+'index.html" title="Dualform \u2014 Inicio">'
+          +'<a class="df-ft-logo" href="'+ftPfx+'" title="Dualform \u2014 Inicio">'
             +'<img src="'+ftPfx+'Resources-Img-Vid/Dualform_logo_background_removed.png" alt="Dualform" class="df-ft-logo-img">'
           +'</a>'
           +'<div class="df-ft-brand-bar"></div>'
@@ -727,20 +722,20 @@
         +'</div>'
         // ── Link columns ──────────────────────────────────────────────────────
         +'<div class="df-ft-col"><h4>Servicios</h4><ul>'
-          +'<li><a href="'+ftPfx+'impresion-3d/index.html">Impresi\u00f3n 3D</a></li>'
-          +'<li><a href="'+ftPfx+'inyeccion-de-plastico/index.html">Inyecci\u00f3n de pl\u00e1stico</a></li>'
-          +'<li><a href="'+ftPfx+'servicios/index.html">Dise\u00f1o 3D</a></li>'
-          +'<li><a href="'+ftPfx+'servicios/index.html">Prototipado r\u00e1pido</a></li>'
+          +'<li><a href="'+ftPfx+'impresion-3d/">Impresi\u00f3n 3D</a></li>'
+          +'<li><a href="'+ftPfx+'inyeccion-de-plastico/">Inyecci\u00f3n de pl\u00e1stico</a></li>'
+          +'<li><a href="'+ftPfx+'servicios/">Dise\u00f1o 3D</a></li>'
+          +'<li><a href="'+ftPfx+'servicios/">Prototipado r\u00e1pido</a></li>'
         +'</ul></div>'
         +'<div class="df-ft-col"><h4>Aplicaciones</h4><ul>'
-          +'<li><a href="'+ftPfx+'aplicaciones/index.html">Prototipado r\u00e1pido</a></li>'
-          +'<li><a href="'+ftPfx+'aplicaciones/index.html">Piezas de uso final</a></li>'
-          +'<li><a href="'+ftPfx+'industria/index.html">Ingenier\u00eda</a></li>'
-          +'<li><a href="'+ftPfx+'industria/index.html">Fabricaci\u00f3n</a></li>'
+          +'<li><a href="'+ftPfx+'aplicaciones/">Prototipado r\u00e1pido</a></li>'
+          +'<li><a href="'+ftPfx+'aplicaciones/">Piezas de uso final</a></li>'
+          +'<li><a href="'+ftPfx+'industria/">Ingenier\u00eda</a></li>'
+          +'<li><a href="'+ftPfx+'industria/">Fabricaci\u00f3n</a></li>'
         +'</ul></div>'
         +'<div class="df-ft-col"><h4>Contacto</h4><ul>'
-          +'<li><a href="'+ftPfx+'contacto/index.html">Solicitar cotizaci\u00f3n</a></li>'
-          +'<li><a href="'+ftPfx+'contacto/index.html">Soporte t\u00e9cnico</a></li>'
+          +'<li><a href="'+ftPfx+'contacto/">Solicitar cotizaci\u00f3n</a></li>'
+          +'<li><a href="'+ftPfx+'contacto/">Soporte t\u00e9cnico</a></li>'
           +'<li><span>contacto@dualform.mx</span></li>'
           +'<li><span>+52 (55) 0000-0000</span></li>'
         +'</ul></div>'
