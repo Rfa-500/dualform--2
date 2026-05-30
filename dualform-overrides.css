@@ -915,7 +915,7 @@ div[id="featured-products"] {
 }
 #df-materiales .df-mat-img { height: 240px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: #ebebef; border: 1.5px dashed rgba(0,0,0,0.1); overflow: hidden; }
 #df-materiales .df-mat-img--photo { background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6); }
-#df-materiales .df-mat-photo { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; padding: 16px; }
+#df-materiales .df-mat-photo { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; padding: 0; border-radius: inherit; }
 #df-materiales .df-mat-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 #df-materiales .df-mat-placeholder span { font-size: 11px; font-weight: 600; color: #bbb; letter-spacing: 0.12em; text-transform: uppercase; }
 

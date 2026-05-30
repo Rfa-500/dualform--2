@@ -152,13 +152,13 @@
   ───────────────────────────────────────────────────────── */
 
   var SECTOR_CARDS = [
-    { name: 'Ingeniería',             img: 'Ingeniería.png' },
-    { name: 'Prototipado',            img: 'Prototipado.png' },
-    { name: 'Piezas funcionales',     img: 'Piezas funcionales.png' },
-    { name: 'Fabricación',            img: 'Fabricación.png' },
+    { name: 'Ingeniería',             img: '/New images web Last images/Ingeniería y producto.png' },
+    { name: 'Prototipado',            img: '/New images web Last images/Prototipado rápido Creación rápida de prototipos.png' },
+    { name: 'Piezas funcionales',     img: '/New images web Last images/Piezas de uso final Fabricación de piezas de uso final.png' },
+    { name: 'Fabricación',            img: '/New images web Last images/Fabricación industrial.png' },
     { name: 'Moldes',                 img: 'Moldes.png' },
-    { name: 'Desarrollo de producto', img: 'Desarrollo de producto.png' },
-    { name: 'Producción',             img: 'Production.png' }
+    { name: 'Desarrollo de producto', img: '/New images web Last images/Desarrollo de producto.png' },
+    { name: 'Producción',             img: '/New images web Last images/Producción industrial.png' }
   ];
 
   function injectSectorsSection() {
@@ -170,7 +170,7 @@
 
     var cardsHTML = SECTOR_CARDS.map(function(s) {
       return '<div class="df-sector-card">'
-        + '<div class="df-sector-icon df-sector-icon--img"><img src="Resources-Img-Vid/Vectores/' + s.img + '" alt="' + s.name + '" onerror="this.style.display=\'none\'"></div>'
+        + '<div class="df-sector-icon df-sector-icon--img"><img src="' + s.img + '" alt="' + s.name + '" onerror="this.style.display=\'none\'"></div>'
         + '<div class="df-sector-name">' + s.name + '</div>'
         + '</div>';
     }).join('');
@@ -206,42 +206,42 @@
         title: 'Impresión 3D',
         desc:  'Fabricación de piezas en plástico de alta precisión usando FDM, SLA y SLS. Ideal para prototipos y piezas funcionales.',
         href:  getSiteRoot() + 'impresion-3d/',
-        img:   'Resources-Img-Vid/Extra/Impresi\u00f3n 3D FDM.png',
+        img:   '/New images web Last images/Impresión FDM.png',
         icon:  '<path d="M6 9V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><rect x="2" y="9" width="20" height="13" rx="2"/><line x1="12" y1="13" x2="12" y2="19"/>'
       },
       {
         title: 'Inyección de Plástico',
         desc:  'Producción de piezas plásticas en volúmenes medianos y altos con excelente acabado superficial y repetibilidad.',
         href:  getSiteRoot() + 'inyeccion-de-plastico/',
-        img:   'Resources-Img-Vid/Extra/Inyeccion de plastico.png',
+        img:   '/New images web Last images/Inyección de plástico.png',
         icon:  '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>'
       },
       {
         title: 'Dise\u00f1o 3D',
         desc:  'Modelado CAD profesional y dise\u00f1o orientado a manufactura (DFM). Del concepto al archivo listo para producci\u00f3n.',
         href:  getSiteRoot() + 'servicios/',
-        img:   '',
+        img:   '/New images web Last images/Diseño 3D Diseño CAD 3D.png',
         icon:  '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
       },
       {
         title: 'Prototipado R\u00e1pido',
         desc:  'Del concepto al prototipo f\u00edsico en horas. Validamos forma, ajuste y funci\u00f3n antes de comprometerte con herramienta.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Prototipo.png',
+        img:   '/New images web Last images/Prototipado rápido Creación rápida de prototipos.png',
         icon:  '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
       },
       {
         title: 'Piezas Funcionales',
         desc:  'Producci\u00f3n de piezas listas para uso final con los materiales y procesos \u00f3ptimos para cada aplicaci\u00f3n industrial.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Pieza final.png',
+        img:   '/New images web Last images/Piezas de uso final Fabricación de piezas de uso final.png',
         icon:  '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/>'
       },
       {
         title: 'Selecci\u00f3n de Materiales',
         desc:  'Asesor\u00eda en la elecci\u00f3n del material \u00f3ptimo seg\u00fan requerimientos mec\u00e1nicos, t\u00e9rmicos, qu\u00edmicos o est\u00e9ticos.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Materiales.png',
+        img:   '/New images web Last images/Materiales especializados.png',
         icon:  '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'
       }
     ];
@@ -259,14 +259,14 @@
           + '<span class="df-serv-num">' + num + '</span>'
           + '<div class="df-serv-card-icon" style="display:none">'
           + svgIcon(s.icon)
-          + '<span class="df-serv-placeholder-label">Imagen pr\u00f3ximamente</span>'
+          + '<span class="df-serv-placeholder-label"></span>'
           + '</div>';
       } else {
         imgContent =
           '<span class="df-serv-num">' + num + '</span>'
           + '<div class="df-serv-card-icon">'
           + svgIcon(s.icon)
-          + '<span class="df-serv-placeholder-label">Imagen pr\u00f3ximamente</span>'
+          + '<span class="df-serv-placeholder-label"></span>'
           + '</div>';
       }
       return '<div class="df-serv-card">'
@@ -424,8 +424,8 @@
     var anchor = document.getElementById('df-servicios-section');
 
     var cards = [
-      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'Resources-Img-Vid/Machines%20good/3d%20final.png', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
-      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
+      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/New images web Last images/Impresión FDM.png', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
+      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/New images web Last images/Inyección de plástico.png', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
     ];
 
     var cardsHTML = cards.map(function(c) {
@@ -456,7 +456,7 @@
     'PETG':{'img':'/Resources-Img-Vid/Vectores/Tereftalato%20de%20polietileno%20—%20PETG.png','tag':'Semi-rígido · Resistente','title':'PETG — Tereftalato de Polietileno','desc':'Excelente balance entre rigidez y tenacidad. Resistente a la humedad, translúcido, ideal para contenedores y piezas funcionales.','adv':['Resistente a la humedad','Translúcido disponible','Buena adhesión entre capas','Apto uso alimentario'],'apps':['Contenedores y tapas','Protectores de piezas','Piezas de uso final','Uso alimentario grado']},
     'ABS':{'img':'/Resources-Img-Vid/Vectores/Acrilonitrilo%20butadieno%20estireno%20—%20ABS.png','tag':'Rígido · Alta temperatura','title':'ABS — Acrilonitrilo Butadieno Estireno','desc':'Material técnico con alta resistencia al impacto y buenas propiedades mecánicas. Compatible con acabados superficiales.','adv':['Alta resistencia al impacto','Mecanizable y pintable','Acabado con acetona','Buena relación precio-desempeño'],'apps':['Carcasas técnicas','Piezas mecanizadas','Componentes automotrices','Prototipos funcionales']},
     'TPU':{'img':'/Resources-Img-Vid/Vectores/Poliuretano%20termoplástico%20—%20TPU.png','tag':'Flexible · Elástico','title':'TPU — Poliuretano Termoplástico','desc':'Material flexible ideal para juntas, sellos, protectores de impacto y piezas que requieren elasticidad sin perder resistencia.','adv':['Alta flexibilidad','Resistente a la abrasión','Elasticidad duradera','Agarre ergonómico'],'apps':['Juntas y sellos','Mangos ergonómicos','Protectores de golpes','Ajuste a presión']},
-    'Nylon / PA':{'img':'/Resources-Img-Vid/Vectores/Nylon%20PA.png','tag':'Alta resistencia · Técnico','title':'Nylon / Poliamida (PA)','desc':'Excelente resistencia mecánica, tenacidad y resistencia química para piezas industriales de uso final.','adv':['Alta resistencia mecánica','Resistencia química','Bajo coeficiente de fricción','Duradero'],'apps':['Engranajes y poleas','Bujes y rodamientos','Piezas estructurales','Componentes de maquinaria']},
+    'Nylon / PA':{'img':'/Resources-Img-Vid/Vectores/Nylon%20%20PA.png','tag':'Alta resistencia · Técnico','title':'Nylon / Poliamida (PA)','desc':'Excelente resistencia mecánica, tenacidad y resistencia química para piezas industriales de uso final.','adv':['Alta resistencia mecánica','Resistencia química','Bajo coeficiente de fricción','Duradero'],'apps':['Engranajes y poleas','Bujes y rodamientos','Piezas estructurales','Componentes de maquinaria']},
     'Resinas técnicas':{'img':'/Resources-Img-Vid/Vectores/Resinas%20técnicas%20SLA.png','tag':'Alta precisión · SLA','title':'Resinas técnicas SLA','desc':'Alta resolución para piezas con detalle fino, superficies suaves y propiedades mecánicas específicas por formulación.','adv':['Altísima resolución','Superficies suaves','Amplia gama de propiedades','Detalle fino'],'apps':['Prototipos de alta fidelidad','Joyería y detalle fino','Odontología y medicina','Óptica y transparentes']},
     'Alta temperatura':{'img':'/Resources-Img-Vid/Vectores/Alta%20temperatura.png','tag':'PEEK · PPS · PC','title':'Materiales de alta temperatura','desc':'Polímeros de alto rendimiento que mantienen propiedades mecánicas y dimensionales a temperaturas superiores a 150°C.','adv':['Estabilidad >150°C','Alta rigidez térmica','Resistencia química','Baja deformación'],'apps':['Componentes cerca de motores','Piezas automotrices','Conectores eléctricos','Utillajes de producción']},
     'Flexibles':{'img':'/Resources-Img-Vid/Vectores/Flexibles.png','tag':'TPE · Silicona · Goma','title':'Materiales flexibles','desc':'Formulaciones blandas para absorción de impactos, sellado hermético o movimiento repetitivo.','adv':['Absorción de impactos','Sellado hermético','Movimiento repetitivo','Tacto suave'],'apps':['Sellos y empaquetaduras','Piezas amortiguadoras','Suelas y agarre','Protectores de equipos']}
@@ -612,17 +612,19 @@
     var anchor = document.getElementById('df-materiales');
 
     var LOGOS = [
-      { name: 'DNORD',  src: '/Resources-Img-Vid/Vectores/DNORDLOGO.png' },
-      { name: 'NORD',   src: '/Resources-Img-Vid/Vectores/NORDLOGO.png' },
-      { name: 'GLOBAL', src: '/Resources-Img-Vid/Vectores/GLOBALLOGO.png' },
-      { name: 'JMJ',    src: '/Resources-Img-Vid/Vectores/JMJLOGO.png' }
+      { name: 'Distribuidora Nord', src: '/Resources-Img-Vid/Vectores/DNORDLOGO.png', href: 'https://www.instagram.com/distribuidoranord/', dark: true },
+      { name: 'NORD azul', src: '/Resources-Img-Vid/Vectores/NORDLOGO.png', href: 'https://www.facebook.com/persianasnord' },
+      { name: 'Global Shade Supplier', src: '/Resources-Img-Vid/Vectores/GLOBALLOGO.png', href: 'https://www.instagram.com/globalshadessupplier/' },
+      { name: 'JMJ Toldos y Persianas', src: '/Resources-Img-Vid/Vectores/JMJLOGO.png', href: 'https://www.toldosjmj.com/' }
     ];
 
     // Double for continuous infinite-loop scrolling with the four real logos.
     function logoCard(l) {
-      return '<div class="df-logo-card" aria-label="' + l.name + '">'
-        + '<img class="df-logo-img" src="' + l.src + '" alt="' + l.name + '" loading="lazy" decoding="async" onerror="this.closest(\'.df-logo-card\').style.display=\'none\'">'
-        + '</div>';
+      var style = 'cursor:pointer;';
+      if (l.dark) style += 'background:linear-gradient(135deg,#050505 0%,#171717 100%);border-color:rgba(255,255,255,0.12);';
+      return '<a class="df-logo-card' + (l.dark ? ' df-logo-card--dark' : '') + '" href="' + l.href + '" target="_blank" rel="noopener noreferrer" aria-label="' + l.name + '" style="' + style + '">'
+        + "<img class=\"df-logo-img\" src=\"" + l.src + "\" alt=\"" + l.name + "\" loading=\"lazy\" decoding=\"async\" onerror=\"this.closest('.df-logo-card').style.display='none'\">"
+        + '</a>';
     }
     var logosHTML = LOGOS.concat(LOGOS).map(logoCard).join('');
 
@@ -642,16 +644,26 @@
     if (anchor) anchor.insertAdjacentElement('afterend', sec);
     else document.body.appendChild(sec);
 
-    // Auto-scroll logos
+    // Auto-scroll logos continuously; pause only while hovering a logo/card.
     setTimeout(function() {
       var track = document.getElementById('df-logos-track');
       if (!track) return;
       var isPaused = false;
-      track.addEventListener('mouseenter', function() { isPaused = true; });
-      track.addEventListener('mouseleave', function() { isPaused = false; });
-      function scrollLogos() {
+      var lastTime = null;
+      var speed = 36; // pixels per second
+
+      track.querySelectorAll('.df-logo-card').forEach(function(card) {
+        card.addEventListener('mouseenter', function() { isPaused = true; });
+        card.addEventListener('mouseleave', function() { isPaused = false; lastTime = null; });
+      });
+
+      function scrollLogos(timestamp) {
+        if (lastTime === null) lastTime = timestamp;
+        var delta = timestamp - lastTime;
+        lastTime = timestamp;
+
         if (!isPaused) {
-          track.scrollLeft += 0.5;
+          track.scrollLeft += (speed * delta) / 1000;
           if (track.scrollLeft >= track.scrollWidth / 2) {
             track.scrollLeft -= track.scrollWidth / 2;
           }
@@ -755,10 +767,9 @@
         +'<div class="df-ft-col"><h4>Contacto</h4><ul>'
           +'<li><a href="'+ftPfx+'contacto/">Solicitar cotizaci\u00f3n</a></li>'
           +'<li><a href="'+ftPfx+'contacto/">Soporte t\u00e9cnico</a></li>'
-          +'<li><span>Dualformindustries@gmail.com</span></li>'
-          +'<li><span>+507 63063129</span></li>'
-          +'<li><span>contacto@dualform.mx</span></li>'
-          +'<li><span>+52 (55) 0000-0000</span></li>'
+          +'<li><a href="mailto:Dualformindustries@gmail.com">Dualformindustries@gmail.com</a></li>'
+          +'<li><a href="tel:+50763063129">+507 63063129</a></li>'
+          +'<li><span>Río Abajo, Calle 18, entrando por repuestos mundiales #2 diagonal a grupo CUSA, Panama City, Panama 0000</span></li>'
         +'</ul></div>'
       +'</div>'
       +'<hr class="df-ft-divider">'
