@@ -457,6 +457,7 @@
     'ABS':{'img':'/Resources-Img-Vid/Vectores/Acrilonitrilo%20butadieno%20estireno%20—%20ABS.png','tag':'Rígido · Alta temperatura','title':'ABS — Acrilonitrilo Butadieno Estireno','desc':'Material técnico con alta resistencia al impacto y buenas propiedades mecánicas. Compatible con acabados superficiales.','adv':['Alta resistencia al impacto','Mecanizable y pintable','Acabado con acetona','Buena relación precio-desempeño'],'apps':['Carcasas técnicas','Piezas mecanizadas','Componentes automotrices','Prototipos funcionales']},
     'TPU':{'img':'/Resources-Img-Vid/Vectores/Poliuretano%20termoplástico%20—%20TPU.png','tag':'Flexible · Elástico','title':'TPU — Poliuretano Termoplástico','desc':'Material flexible ideal para juntas, sellos, protectores de impacto y piezas que requieren elasticidad sin perder resistencia.','adv':['Alta flexibilidad','Resistente a la abrasión','Elasticidad duradera','Agarre ergonómico'],'apps':['Juntas y sellos','Mangos ergonómicos','Protectores de golpes','Ajuste a presión']},
     'Nylon / PA':{'img':'/Resources-Img-Vid/Vectores/Nylon%20PA.png','fallbackImgs':['/Resources-Img-Vid/Vectores/nylon.png'],'tag':'Alta resistencia · Técnico','title':'Nylon / Poliamida (PA)','desc':'Excelente resistencia mecánica, tenacidad y resistencia química para piezas industriales de uso final.','adv':['Alta resistencia mecánica','Resistencia química','Bajo coeficiente de fricción','Duradero'],'apps':['Engranajes y poleas','Bujes y rodamientos','Piezas estructurales','Componentes de maquinaria']},
+    'Nylon / PA':{'img':'/Resources-Img-Vid/Vectores/Nylon%20PA.png','tag':'Alta resistencia · Técnico','title':'Nylon / Poliamida (PA)','desc':'Excelente resistencia mecánica, tenacidad y resistencia química para piezas industriales de uso final.','adv':['Alta resistencia mecánica','Resistencia química','Bajo coeficiente de fricción','Duradero'],'apps':['Engranajes y poleas','Bujes y rodamientos','Piezas estructurales','Componentes de maquinaria']},
     'Resinas técnicas':{'img':'/Resources-Img-Vid/Vectores/Resinas%20técnicas%20SLA.png','tag':'Alta precisión · SLA','title':'Resinas técnicas SLA','desc':'Alta resolución para piezas con detalle fino, superficies suaves y propiedades mecánicas específicas por formulación.','adv':['Altísima resolución','Superficies suaves','Amplia gama de propiedades','Detalle fino'],'apps':['Prototipos de alta fidelidad','Joyería y detalle fino','Odontología y medicina','Óptica y transparentes']},
     'Alta temperatura':{'img':'/Resources-Img-Vid/Vectores/Alta%20temperatura.png','tag':'PEEK · PPS · PC','title':'Materiales de alta temperatura','desc':'Polímeros de alto rendimiento que mantienen propiedades mecánicas y dimensionales a temperaturas superiores a 150°C.','adv':['Estabilidad >150°C','Alta rigidez térmica','Resistencia química','Baja deformación'],'apps':['Componentes cerca de motores','Piezas automotrices','Conectores eléctricos','Utillajes de producción']},
     'Flexibles':{'img':'/Resources-Img-Vid/Vectores/Flexibles.png','tag':'TPE · Silicona · Goma','title':'Materiales flexibles','desc':'Formulaciones blandas para absorción de impactos, sellado hermético o movimiento repetitivo.','adv':['Absorción de impactos','Sellado hermético','Movimiento repetitivo','Tacto suave'],'apps':['Sellos y empaquetaduras','Piezas amortiguadoras','Suelas y agarre','Protectores de equipos']}
@@ -589,6 +590,8 @@
     var imgFallbacks = d.img ? [d.img].concat(d.fallbackImgs || []) : [];
     var imgHtml = d.img
       ? '<img class="df-mat-photo" src="' + d.img + '" alt="' + d.title + '" loading="lazy" decoding="async" data-fallbacks="' + imgFallbacks.join('|') + '" data-fallback-index="0" onerror="var list=this.getAttribute(\'data-fallbacks\').split(\'|\');var idx=parseInt(this.getAttribute(\'data-fallback-index\')||\'0\',10)+1;if(idx<list.length){this.setAttribute(\'data-fallback-index\',idx);this.src=list[idx];}else{this.parentNode.classList.remove(\'df-mat-img--photo\');this.outerHTML=\'<div class=&quot;df-mat-placeholder&quot;><span>Imagen próximamente</span></div>\';}">'
+    var imgHtml = d.img
+      ? '<img class="df-mat-photo" src="' + d.img + '" alt="' + d.title + '" loading="lazy" decoding="async" onerror="this.parentNode.classList.remove(\'df-mat-img--photo\');this.outerHTML=\'<div class=&quot;df-mat-placeholder&quot;><span>Imagen próximamente</span></div>\'">'
       : '<div class="df-mat-placeholder"><span>Imagen próximamente</span></div>';
     var imgClass = 'df-mat-img' + (d.img ? ' df-mat-img--photo' : '');
 
@@ -622,6 +625,7 @@
     // Double for continuous infinite-loop scrolling with the four real logos.
     function logoCard(l) {
       return '<div class="df-logo-card' + (l.name === 'DNORD' ? ' df-logo-card--dnord' : '') + '" aria-label="' + l.name + '">'
+      return '<div class="df-logo-card" aria-label="' + l.name + '">'
         + '<img class="df-logo-img" src="' + l.src + '" alt="' + l.name + '" loading="lazy" decoding="async" onerror="this.closest(\'.df-logo-card\').style.display=\'none\'">'
         + '</div>';
     }
@@ -758,6 +762,8 @@
           +'<li><a href="'+ftPfx+'contacto/">Soporte t\u00e9cnico</a></li>'
           +'<li><span>Dualformindustries@gmail.com</span></li>'
           +'<li><span>+507 63063129</span></li>'
+          +'<li><span>contacto@dualform.mx</span></li>'
+          +'<li><span>+52 (55) 0000-0000</span></li>'
         +'</ul></div>'
       +'</div>'
       +'<hr class="df-ft-divider">'
