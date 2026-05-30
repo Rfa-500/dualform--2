@@ -208,21 +208,6 @@ a  { text-decoration: none; color: inherit; }
 .df-placeholder--video .df-placeholder-icon { background: rgba(232,82,26,0.2); }
 
 
-.df-placeholder.df-real-media {
-  width: 100%;
-  height: auto;
-  min-height: inherit;
-  overflow: hidden;
-  border-radius: inherit;
-  padding: 0;
-  border: 0;
-  display: block;
-}
-.df-placeholder.df-real-media::before { display: none; }
-.df-placeholder.df-real-media img {
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
 .df-real-media {
   width: 100%;
   height: 100%;
