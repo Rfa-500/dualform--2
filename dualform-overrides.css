@@ -181,46 +181,12 @@ html, body, * {
   right: 0 !important;
   bottom: 0 !important;
   z-index: 0 !important;
-  background-image: url('/Resources-Img-Vid/Vectores/image%20(1).png') !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-color: #101010 !important;
 }
 
 .Box_box__aYil_.Box_dark__S8Dzc .box_background video {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
-.Box_box__aYil_.Box_dark__S8Dzc .box_background .df-hero-bg-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0;
-  transition: opacity 0.28s ease;
-}
-
-.Box_box__aYil_.Box_dark__S8Dzc .box_background.df-hero-bg-ready .df-hero-bg-img {
-  opacity: 1;
-}
-
-.Box_box__aYil_.Box_dark__S8Dzc .box_background.df-hero-bg-ready video,
-.Box_box__aYil_.Box_dark__S8Dzc .box_background.df-hero-bg-ready > img:not(.df-hero-bg-img) {
-  opacity: 0;
-}
-
-.Box_box__aYil_.Box_dark__S8Dzc .box_background::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.42);
-  pointer-events: none;
 }
 
 .Box_box__aYil_.Box_dark__S8Dzc .box_background .df-hero-bg-img {
@@ -949,7 +915,6 @@ div[id="featured-products"] {
 }
 #df-materiales .df-mat-img { height: 240px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: #ebebef; border: 1.5px dashed rgba(0,0,0,0.1); overflow: hidden; }
 #df-materiales .df-mat-img--photo { background: #fff; border: 1px solid rgba(0,0,0,0.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6); }
-#df-materiales .df-mat-photo { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; padding: 0; border-radius: inherit; }
 #df-materiales .df-mat-photo { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; padding: 16px; }
 #df-materiales .df-mat-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 #df-materiales .df-mat-placeholder span { font-size: 11px; font-weight: 600; color: #bbb; letter-spacing: 0.12em; text-transform: uppercase; }
@@ -1056,16 +1021,6 @@ div[id="featured-products"] {
 #df-nuestras-tech .df-logo-card:hover {
   border-color: rgba(232,82,26,0.25);
   box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-}
-
-#df-nuestras-tech .df-logo-card--dnord {
-  background: linear-gradient(135deg, #080808 0%, #1a1a1a 100%);
-  border-color: rgba(255,255,255,0.12);
-}
-
-#df-nuestras-tech .df-logo-card--dnord:hover {
-  border-color: rgba(232,82,26,0.45);
-  box-shadow: 0 6px 22px rgba(0,0,0,0.16);
 }
 
 #df-nuestras-tech .df-logo-img {
