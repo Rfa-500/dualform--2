@@ -1,4 +1,4 @@
-/* dualform-page-common.js v2 — premium footer + chip helper */
+/* dualform-page-common.js v10 — premium footer + chip helper */
 (function() {
 
   function getSiteRoot() {
@@ -51,10 +51,9 @@
             '<div class="df-ft-col"><h4>Contacto</h4><ul>' +
               '<li><a href="' + pfx + 'contacto/">Solicitar cotizaci\u00f3n</a></li>' +
               '<li><a href="' + pfx + 'contacto/">Soporte t\u00e9cnico</a></li>' +
-              '<li><span>Dualformindustries@gmail.com</span></li>' +
-              '<li><span>+507 63063129</span></li>' +
-              '<li><span>contacto@dualform.mx</span></li>' +
-              '<li><span>+52 (55) 0000-0000</span></li>' +
+              '<li><a href="mailto:Dualformindustries@gmail.com">Dualformindustries@gmail.com</a></li>' +
+              '<li><a href="tel:+50763063129">+507 63063129</a></li>' +
+              '<li><span>Río Abajo, Calle 18, entrando por repuestos mundiales #2 diagonal a grupo CUSA, Panama City, Panama 0000</span></li>' +
             '</ul></div>' +
           '</div>' +
           '<hr class="df-ft-divider">' +
@@ -105,9 +104,8 @@
           (adv  ? '<h4 style="font-size:0.75rem;color:#E8521A;text-transform:uppercase;letter-spacing:0.09em;margin-bottom:8px;margin-top:18px;font-weight:700;">Ventajas</h4><ul class="df-mat-list">' + adv + '</ul>' : '') +
           (uses ? '<h4 style="font-size:0.75rem;color:#E8521A;text-transform:uppercase;letter-spacing:0.09em;margin-bottom:8px;margin-top:18px;font-weight:700;">Usos recomendados</h4><ul class="df-mat-list">' + uses + '</ul>' : '') +
         '</div>' +
-        '<div class="df-placeholder df-placeholder--light" style="min-height:280px;">' +
-          '<div class="df-placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>' +
-          '<span class="df-placeholder-label">Imagen \u2014 ' + active + '</span>' +
+        '<div class="df-mat-media">' +
+          '<img class="df-mat-media-img" src="' + (d.img || '') + '" alt="' + (d.title || active) + '" loading="lazy" decoding="async">' +
         '</div>';
 
       if (animate) {

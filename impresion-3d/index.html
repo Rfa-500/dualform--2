@@ -3,21 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
   <title>Impresión 3D Profesional | Dualform</title>
-  <meta name="description" content="Fabricación aditiva para prototipos, piezas funcionales y componentes personalizados para ingeniería, diseño y producción industrial.">
-  <link rel="stylesheet" href="../dualform-header.css?v=6">
+  <meta name="description" content="Dualform ofrece servicios de impresión 3D, diseño 3D e inyección de plástico para prototipos, piezas funcionales y producción industrial en Panamá.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Dualform">
+  <meta property="og:title" content="Impresión 3D Profesional | Dualform">
+  <meta property="og:description" content="Impresión 3D, diseño 3D e inyección de plástico para prototipos, piezas funcionales y producción industrial en Panamá.">
+  <meta property="og:url" content="https://dualform.com.pa/impresion-3d/">
+  <meta property="og:image" content="https://dualform.com.pa/Resources-Img-Vid/Vectores/image%20(1).png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Impresión 3D Profesional | Dualform">
+  <meta name="twitter:description" content="Impresión 3D, diseño 3D e inyección de plástico para prototipos, piezas funcionales y producción industrial en Panamá.">
+  <meta name="twitter:image" content="https://dualform.com.pa/Resources-Img-Vid/Vectores/image%20(1).png">
+  <link rel="canonical" href="https://dualform.com.pa/impresion-3d/">
+  <link rel="icon" href="/Resources-Img-Vid/Dualform_logo_background_removed.png">
+  <link rel="apple-touch-icon" href="/Resources-Img-Vid/Dualform_logo_background_removed.png">
+<link rel="stylesheet" href="../dualform-header.css?v=6">
   <link rel="stylesheet" href="../dualform-overrides.css?v=10">
-  <link rel="stylesheet" href="../dualform-overrides.css?v=9">
-  <link rel="stylesheet" href="../dualform-overrides.css?v=8">
-  <link rel="stylesheet" href="../dualform-overrides.css?v=7">
-  <link rel="stylesheet" href="../dualform-overrides.css?v=6">
-  <link rel="stylesheet" href="../dualform-pages.css?v=6">
-  <link rel="icon" type="image/png" href="/Resources-Img-Vid/Dualform_logo_background_removed.png">
+  <link rel="stylesheet" href="../dualform-overrides.css?v=10">
+  <link rel="stylesheet" href="../dualform-overrides.css?v=10">
+  <link rel="stylesheet" href="../dualform-overrides.css?v=10">
+  <link rel="stylesheet" href="../dualform-overrides.css?v=10">
+  <link rel="stylesheet" href="../dualform-pages.css?v=10">
+  
 </head>
 <body>
 <script src="../dualform-header.js?v=6" defer></script>
-<script src="../dualform-page-common.js?v=7" defer></script>
-<script src="../dualform-page-common.js?v=6" defer></script>
+<script src="../dualform-page-common.js?v=10" defer></script>
+<script src="../dualform-page-common.js?v=10" defer></script>
 
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="df-hero">
@@ -135,50 +150,42 @@
 <script>
 (function() {
   var mats = {
-    'PLA': {
-      tag: 'Biodegradable · Rígido',
+    'PLA': { img: '/Resources-Img-Vid/Vectores/Ácido%20poliláctico%20—%20PLA.png', tag: 'Biodegradable · Rígido',
       title: 'PLA — Ácido Poliláctico',
       desc: 'Material de entrada ideal para prototipos de forma, maquetas y piezas de baja carga. Fácil de imprimir, buena definición de detalles.',
       uses: ['Prototipos de forma y ajuste', 'Maquetas de presentación', 'Modelos educativos', 'Piezas decorativas']
     },
-    'PETG': {
-      tag: 'Semi-rígido · Resistente',
+    'PETG': { img: '/Resources-Img-Vid/Vectores/Tereftalato%20de%20polietileno%20—%20PETG.png', tag: 'Semi-rígido · Resistente',
       title: 'PETG — Tereftalato de Polietileno',
       desc: 'Excelente balance entre rigidez y tenacidad. Resistente a la humedad, translúcido, ideal para contenedores, protectores y piezas funcionales.',
       uses: ['Contenedores y tapas', 'Protectores de piezas', 'Piezas de uso final ligero', 'Aplicaciones en contacto con alimentos (grado alimenticio)']
     },
-    'ABS': {
-      tag: 'Rígido · Alta temperatura',
+    'ABS': { img: '/Resources-Img-Vid/Vectores/Acrilonitrilo%20butadieno%20estireno%20—%20ABS.png', tag: 'Rígido · Alta temperatura',
       title: 'ABS — Acrilonitrilo Butadieno Estireno',
       desc: 'Material técnico con alta resistencia al impacto y buenas propiedades mecánicas. Compatible con acabados superficiales como lija, pintura y acetona.',
       uses: ['Carcasas técnicas', 'Piezas mecanizadas', 'Piezas automotrices', 'Prototipos funcionales de alta resistencia']
     },
-    'TPU': {
-      tag: 'Flexible · Elástico',
+    'TPU': { img: '/Resources-Img-Vid/Vectores/Poliuretano%20termoplástico%20—%20TPU.png', tag: 'Flexible · Elástico',
       title: 'TPU — Poliuretano Termoplástico',
       desc: 'Material flexible ideal para juntas, sellos, protectores de impacto y piezas que requieren elasticidad sin perder resistencia.',
       uses: ['Juntas y sellos', 'Mangos y agarre ergonómico', 'Protectores de golpes', 'Piezas con ajuste a presión']
     },
-    'Nylon / PA': {
-      tag: 'Alta resistencia · Técnico',
+    'Nylon / PA': { img: '/Resources-Img-Vid/Vectores/Nylon%20%20PA.png', tag: 'Alta resistencia · Técnico',
       title: 'Nylon / Poliamida (PA)',
       desc: 'Material técnico con excelente resistencia mecánica, tenacidad y resistencia química. Ideal para piezas industriales de uso final.',
       uses: ['Engranajes y poleas', 'Bujes y rodamientos', 'Piezas estructurales ligeras', 'Componentes de maquinaria']
     },
-    'Resinas técnicas': {
-      tag: 'Alta precisión · SLA',
+    'Resinas técnicas': { img: '/Resources-Img-Vid/Vectores/Resinas%20técnicas%20SLA.png', tag: 'Alta precisión · SLA',
       title: 'Resinas técnicas',
       desc: 'Materiales de alta resolución para piezas con detalle fino, superficies suaves y propiedades mecánicas específicas por formulación.',
       uses: ['Prototipos de alta fidelidad', 'Joyería y detalle fino', 'Odontología y medicina', 'Óptica y piezas transparentes']
     },
-    'Alta temperatura': {
-      tag: 'PEEK · PPS · PC',
+    'Alta temperatura': { img: '/Resources-Img-Vid/Vectores/Alta%20temperatura.png', tag: 'PEEK · PPS · PC',
       title: 'Materiales de alta temperatura',
       desc: 'Polímeros de alto rendimiento que mantienen sus propiedades mecánicas y dimensionales a temperaturas superiores a 150°C.',
       uses: ['Componentes cerca de motores', 'Piezas automotrices', 'Conectores eléctricos', 'Utillajes de producción']
     },
-    'Flexibles': {
-      tag: 'TPE · Silicona · Goma',
+    'Flexibles': { img: '/Resources-Img-Vid/Vectores/Flexibles.png', tag: 'TPE · Silicona · Goma',
       title: 'Materiales flexibles',
       desc: 'Formulaciones blandas para aplicaciones que requieren absorción de impactos, sellado hermético o movimiento repetitivo.',
       uses: ['Sellos y empaquetaduras', 'Piezas amortiguadoras', 'Suelas y agarre', 'Protectores de equipos electrónicos']
@@ -217,9 +224,8 @@
           '<p class="df-mat-desc">' + d.desc + '</p>' +
           '<ul class="df-mat-list">' + d.uses.map(function(u) { return '<li>' + u + '</li>'; }).join('') + '</ul>' +
         '</div>' +
-        '<div class="df-placeholder df-placeholder--light" style="min-height:280px;">' +
-          '<div class="df-placeholder-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>' +
-          '<span class="df-placeholder-label">Imagen de ' + active + '</span>' +
+        '<div class="df-mat-media">' +
+          '<img class="df-mat-media-img" src="' + d.img + '" alt="' + d.title + '" loading="lazy" decoding="async">' +
         '</div>';
       panel.classList.remove('fading');
     }, 160);
