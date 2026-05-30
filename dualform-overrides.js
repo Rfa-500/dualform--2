@@ -207,6 +207,7 @@
         desc:  'Fabricación de piezas en plástico de alta precisión usando FDM, SLA y SLS. Ideal para prototipos y piezas funcionales.',
         href:  getSiteRoot() + 'impresion-3d/',
         img:   '/New images web Last images/Impresión FDM.png',
+        img:   'Resources-Img-Vid/Machines%20good/3d%20final.png',
         icon:  '<path d="M6 9V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><rect x="2" y="9" width="20" height="13" rx="2"/><line x1="12" y1="13" x2="12" y2="19"/>'
       },
       {
@@ -214,6 +215,7 @@
         desc:  'Producción de piezas plásticas en volúmenes medianos y altos con excelente acabado superficial y repetibilidad.',
         href:  getSiteRoot() + 'inyeccion-de-plastico/',
         img:   '/New images web Last images/Inyección de plástico.png',
+        img:   'Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png',
         icon:  '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>'
       },
       {
@@ -426,6 +428,8 @@
     var cards = [
       { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/New images web Last images/Impresión FDM.png', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
       { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/New images web Last images/Inyección de plástico.png', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
+      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/Resources-Img-Vid/Machines%20good/3d%20final.png', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
+      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
     ];
 
     var cardsHTML = cards.map(function(c) {
