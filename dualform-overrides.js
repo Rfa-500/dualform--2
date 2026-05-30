@@ -59,6 +59,10 @@
     bg.appendChild(img);
   }
 
+  function markHeroReady() {
+    document.body.classList.add('df-hero-ready');
+  }
+
   /* ─────────────────────────────────────────────────────────
      1. DROPDOWN HOVER — JS reinforcement (CSS does most work)
   ───────────────────────────────────────────────────────── */
@@ -459,14 +463,14 @@
   };
 
   var matDataIny = {
-    'ABS':{'tag':'Rígido · Técnico','title':'ABS Inyectado','desc':'Excelente resistencia al impacto, dureza superficial y fácil acabado para piezas de uso final en producción.','adv':['Alta resistencia al impacto','Fácil coloración','Estabilidad dimensional','Mecanizable'],'apps':['Carcasas electrónicas','Automotriz interior','Juguetes y accesorios','Componentes industriales']},
-    'PP':{'tag':'Polipropileno · Versátil','title':'PP — Polipropileno','desc':'Material versátil con excelente resistencia química, bajo peso y buena flexibilidad. Estándar en envases industriales.','adv':['Resistencia química','Bajo peso','Flexible','Económico y escalable'],'apps':['Envases y tapas','Componentes de tubería','Piezas de bajo costo','Bisagras integrales']},
-    'PE':{'tag':'Polietileno · Ligero','title':'PE — Polietileno','desc':'Uno de los plásticos más utilizados. Excelente resistencia química, bajo costo y alta versatilidad.','adv':['Resistencia química','Bajo costo','Flexible y ligero','Apto alimentario'],'apps':['Envases alimentarios','Tuberías y conexiones','Tanques y contenedores','Piezas de baja carga']},
-    'Nylon':{'tag':'PA · Alta resistencia','title':'Nylon / Poliamida Inyectado','desc':'Alta resistencia mecánica, bajo coeficiente de fricción y excelente durabilidad para piezas industriales.','adv':['Alta resistencia','Bajo rozamiento','Resistencia a fatiga','Compatible con refuerzos'],'apps':['Engranajes y poleas','Bujes autolubricados','Piezas estructurales','Maquinaria']},
-    'PC':{'tag':'Policarbonato · Óptico','title':'PC — Policarbonato','desc':'Material transparente de alta resistencia al impacto. Ideal para óptica, estructuras y aplicaciones de seguridad.','adv':['Transparente y óptico','Alta resistencia al impacto','Estabilidad dimensional','Ignífugo disponible'],'apps':['Lentes y ventanas','Carcasas de equipos','Piezas de seguridad','Electrónica']},
-    'POM':{'tag':'Acetal · Precisión','title':'POM — Polioximetileno','desc':'Alta precisión dimensional, baja fricción y alta durabilidad. Ideal para piezas de movimiento y mecanismos.','adv':['Alta precisión','Bajo coeficiente de fricción','Resistencia química','Autolubricante'],'apps':['Engranajes de precisión','Rodillos y guías','Mecanismos','Conectores de precisión']},
-    'TPU':{'tag':'Flexible · Inyectado','title':'TPU Inyectado','desc':'Mayor consistencia en geometrías complejas y mejores propiedades de superficie que el TPU impreso.','adv':['Flexibilidad controlada','Resistencia a abrasión','Geometrías complejas','Alta calidad de superficie'],'apps':['Suelas técnicas','Mangueras flexibles','Protectores','Empaquetaduras de precisión']},
-    'Materiales técnicos':{'tag':'PC · POM · PSU · PEEK','title':'Materiales técnicos avanzados','desc':'Plásticos de ingeniería avanzada para aplicaciones con requisitos térmicos, mecánicos o químicos extremos.','adv':['Rendimiento extremo','Resistencia a alta temperatura','Resistencia química','Certificaciones disponibles'],'apps':['Aeroespacial','Médico','Electrónica avanzada','Aplicaciones de alta exigencia']}
+    'ABS':{'img':'/Resources-Img-Vid/Vectores/ABS%20inyectado.png','tag':'Rígido · Técnico','title':'ABS Inyectado','desc':'Excelente resistencia al impacto, dureza superficial y fácil acabado para piezas de uso final en producción.','adv':['Alta resistencia al impacto','Fácil coloración','Estabilidad dimensional','Mecanizable'],'apps':['Carcasas electrónicas','Automotriz interior','Juguetes y accesorios','Componentes industriales']},
+    'PP':{'img':'/Resources-Img-Vid/Vectores/Polipropileno.png','tag':'Polipropileno · Versátil','title':'PP — Polipropileno','desc':'Material versátil con excelente resistencia química, bajo peso y buena flexibilidad. Estándar en envases industriales.','adv':['Resistencia química','Bajo peso','Flexible','Económico y escalable'],'apps':['Envases y tapas','Componentes de tubería','Piezas de bajo costo','Bisagras integrales']},
+    'PE':{'img':'/Resources-Img-Vid/Vectores/Polietileno.png','tag':'Polietileno · Ligero','title':'PE — Polietileno','desc':'Uno de los plásticos más utilizados. Excelente resistencia química, bajo costo y alta versatilidad.','adv':['Resistencia química','Bajo costo','Flexible y ligero','Apto alimentario'],'apps':['Envases alimentarios','Tuberías y conexiones','Tanques y contenedores','Piezas de baja carga']},
+    'Nylon':{'img':'/Resources-Img-Vid/Vectores/nylon.png','tag':'PA · Alta resistencia','title':'Nylon / Poliamida Inyectado','desc':'Alta resistencia mecánica, bajo coeficiente de fricción y excelente durabilidad para piezas industriales.','adv':['Alta resistencia','Bajo rozamiento','Resistencia a fatiga','Compatible con refuerzos'],'apps':['Engranajes y poleas','Bujes autolubricados','Piezas estructurales','Maquinaria']},
+    'PC':{'img':'/Resources-Img-Vid/Vectores/policarbonato.png','tag':'Policarbonato · Óptico','title':'PC — Policarbonato','desc':'Material transparente de alta resistencia al impacto. Ideal para óptica, estructuras y aplicaciones de seguridad.','adv':['Transparente y óptico','Alta resistencia al impacto','Estabilidad dimensional','Ignífugo disponible'],'apps':['Lentes y ventanas','Carcasas de equipos','Piezas de seguridad','Electrónica']},
+    'POM':{'img':'/Resources-Img-Vid/Vectores/Polioximetileno.png','tag':'Acetal · Precisión','title':'POM — Polioximetileno','desc':'Alta precisión dimensional, baja fricción y alta durabilidad. Ideal para piezas de movimiento y mecanismos.','adv':['Alta precisión','Bajo coeficiente de fricción','Resistencia química','Autolubricante'],'apps':['Engranajes de precisión','Rodillos y guías','Mecanismos','Conectores de precisión']},
+    'TPU':{'img':'/Resources-Img-Vid/Vectores/tpuinyectado.png','tag':'Flexible · Inyectado','title':'TPU Inyectado','desc':'Mayor consistencia en geometrías complejas y mejores propiedades de superficie que el TPU impreso.','adv':['Flexibilidad controlada','Resistencia a abrasión','Geometrías complejas','Alta calidad de superficie'],'apps':['Suelas técnicas','Mangueras flexibles','Protectores','Empaquetaduras de precisión']},
+    'Materiales técnicos':{'img':'/Resources-Img-Vid/Vectores/Materiales%20tecnicos.png','tag':'PC · POM · PSU · PEEK','title':'Materiales técnicos avanzados','desc':'Plásticos de ingeniería avanzada para aplicaciones con requisitos térmicos, mecánicos o químicos extremos.','adv':['Rendimiento extremo','Resistencia a alta temperatura','Resistencia química','Certificaciones disponibles'],'apps':['Aeroespacial','Médico','Electrónica avanzada','Aplicaciones de alta exigencia']}
   };
   function injectMateriales() {
     if (document.getElementById('df-materiales')) return;
@@ -864,6 +868,7 @@
     injectHeroTitle();
     injectHeroBackground();
     translateHeroButtons();
+    markHeroReady();
     deactivateIndustryCards();
     injectSectorsSection();
     hideLegacySections();
@@ -889,6 +894,7 @@
       injectHeroTitle();
       injectHeroBackground();
       translateHeroButtons();
+      markHeroReady();
       injectSectorsSection();
     }, ms);
   });
