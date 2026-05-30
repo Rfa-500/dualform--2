@@ -1,26 +1,26 @@
 (function () {
   'use strict';
 
+  function getSiteRoot() {
+    if (window.location.protocol !== 'file:') return '/';
+
+    var script = document.currentScript || document.querySelector('script[src*="dualform-header.js"]');
+    var src = script ? script.getAttribute('src') || '' : '';
+    var cleanSrc = src.split('?')[0];
+    if (cleanSrc && cleanSrc.indexOf('/') !== -1) return cleanSrc.slice(0, cleanSrc.lastIndexOf('/') + 1);
+    return './';
+  }
   /* ── Build the header HTML ─────────────────────────────── */
   function buildHeader() {
     var h = document.createElement('header');
     h.id = 'df-header';
     h.setAttribute('role', 'banner');
 
-    /* Determine the root-relative prefix so links work from any subdirectory.
-       Works for: file:// local browsing at any depth. */
-    var pathParts = window.location.pathname.split('/');
-    // Find the index of 'formlabs.com' in path
-    var fcIdx = pathParts.indexOf('formlabs.com');
-    var depth = fcIdx !== -1 ? pathParts.length - fcIdx - 2 : 0;
-    var prefix = '';
-    for (var i = 0; i < depth; i++) prefix += '../';
-
-    var root = prefix || './';
+    var root = getSiteRoot();
 
     h.innerHTML = '\
 <div class="df-inner">\
-  <a class="df-logo" href="' + root + 'index.html" id="df-logo-link" title="Dualform">\
+  <a class="df-logo" href="' + root + '" id="df-logo-link" title="Dualform">\
     <img src="' + root + 'Resources-Img-Vid/Dualform_logo_background_removed.png"\
          alt="Dualform"\
          class="df-logo-img"\
@@ -34,80 +34,80 @@
 \
       <!-- 1. Impresión 3D -->\
       <li class="df-nav-item">\
-        <a class="df-nav-link" href="' + root + 'impresion-3d/index.html" id="nav-impresion">\
+        <a class="df-nav-link" href="' + root + 'impresion-3d/" id="nav-impresion">\
           Impresión 3D\
           <svg class="df-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>\
         </a>\
         <div class="df-dropdown" role="menu">\
-          <a href="' + root + 'impresion-3d/index.html" role="menuitem">Impresión FDM</a>\
-          <a href="' + root + 'impresion-3d/index.html" role="menuitem">Diseño 3D</a>\
+          <a href="' + root + 'impresion-3d/" role="menuitem">Impresión FDM</a>\
+          <a href="' + root + 'impresion-3d/" role="menuitem">Diseño 3D</a>\
           <div class="df-drop-divider"></div>\
-          <a href="' + root + 'materiales/index.html" role="menuitem">Materiales para impresión</a>\
-          <a href="' + root + 'software/index.html" role="menuitem">Software relacionado</a>\
+          <a href="' + root + 'materiales/" role="menuitem">Materiales para impresión</a>\
+          <a href="' + root + 'software/" role="menuitem">Software relacionado</a>\
         </div>\
       </li>\
 \
       <!-- 2. Inyección de Plástico -->\
       <li class="df-nav-item">\
-        <a class="df-nav-link" href="' + root + 'inyeccion-de-plastico/index.html" id="nav-inyeccion">\
+        <a class="df-nav-link" href="' + root + 'inyeccion-de-plastico/" id="nav-inyeccion">\
           Inyección de Plástico\
           <svg class="df-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>\
         </a>\
         <div class="df-dropdown" role="menu">\
-          <a href="' + root + 'inyeccion-de-plastico/index.html" role="menuitem">Inyección de alto volumen</a>\
-          <a href="' + root + 'inyeccion-de-plastico/index.html" role="menuitem">Inyección de bajo volumen</a>\
+          <a href="' + root + 'inyeccion-de-plastico/" role="menuitem">Inyección de alto volumen</a>\
+          <a href="' + root + 'inyeccion-de-plastico/" role="menuitem">Inyección de bajo volumen</a>\
         </div>\
       </li>\
 \
       <!-- 3. Aplicaciones -->\
       <li class="df-nav-item">\
-        <a class="df-nav-link" href="' + root + 'aplicaciones/index.html" id="nav-aplicaciones">\
+        <a class="df-nav-link" href="' + root + 'aplicaciones/" id="nav-aplicaciones">\
           Aplicaciones\
           <svg class="df-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>\
         </a>\
         <div class="df-dropdown" role="menu">\
-          <a href="' + root + 'aplicaciones/index.html" role="menuitem">Creación rápida de prototipos</a>\
-          <a href="' + root + 'aplicaciones/index.html" role="menuitem">Fabricación de piezas de uso final</a>\
+          <a href="' + root + 'aplicaciones/" role="menuitem">Creación rápida de prototipos</a>\
+          <a href="' + root + 'aplicaciones/" role="menuitem">Fabricación de piezas de uso final</a>\
         </div>\
       </li>\
 \
       <!-- 4. Industria -->\
       <li class="df-nav-item">\
-        <a class="df-nav-link" href="' + root + 'industria/index.html" id="nav-industria">\
+        <a class="df-nav-link" href="' + root + 'industria/" id="nav-industria">\
           Industria\
           <svg class="df-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>\
         </a>\
         <div class="df-dropdown" role="menu">\
-          <a href="' + root + 'industria/index.html" role="menuitem">Ingeniería</a>\
-          <a href="' + root + 'industria/index.html" role="menuitem">Fabricación</a>\
+          <a href="' + root + 'industria/" role="menuitem">Ingeniería</a>\
+          <a href="' + root + 'industria/" role="menuitem">Fabricación</a>\
         </div>\
       </li>\
 \
       <!-- 5. Servicios -->\
       <li class="df-nav-item">\
-        <a class="df-nav-link" href="' + root + 'servicios/index.html" id="nav-servicios">\
+        <a class="df-nav-link" href="' + root + 'servicios/" id="nav-servicios">\
           Servicios\
           <svg class="df-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>\
         </a>\
         <div class="df-dropdown" role="menu">\
-          <a href="' + root + 'servicios/index.html" role="menuitem">Prototipado rápido</a>\
-          <a href="' + root + 'servicios/index.html" role="menuitem">Fabricación de piezas funcionales</a>\
-          <a href="' + root + 'servicios/index.html" role="menuitem">Asesoría técnica</a>\
+          <a href="' + root + 'servicios/" role="menuitem">Prototipado rápido</a>\
+          <a href="' + root + 'servicios/" role="menuitem">Fabricación de piezas funcionales</a>\
+          <a href="' + root + 'servicios/" role="menuitem">Asesoría técnica</a>\
           <div class="df-drop-divider"></div>\
-          <a href="' + root + 'contacto/index.html" role="menuitem">Solicitar cotización</a>\
+          <a href="' + root + 'contacto/" role="menuitem">Solicitar cotización</a>\
         </div>\
       </li>\
 \
       <!-- 6. Contacto -->\
       <li class="df-nav-item df-nav-direct">\
-        <a class="df-nav-link" href="' + root + 'contacto/index.html" id="nav-contacto">Contacto</a>\
+        <a class="df-nav-link" href="' + root + 'contacto/" id="nav-contacto">Contacto</a>\
       </li>\
 \
     </ul>\
   </nav>\
 \
   <div class="df-cta">\
-    <a class="df-cta-btn" href="' + root + 'contacto/index.html" id="df-cta-main">\
+    <a class="df-cta-btn" href="' + root + 'contacto/" id="df-cta-main">\
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.5 1.23 2 2 0 012.48 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>\
       Solicitar cotización\
     </a>\
@@ -133,51 +133,51 @@
     var items = [
       {
         label: 'Impresión 3D',
-        href: root + 'impresion-3d/index.html',
+        href: root + 'impresion-3d/',
         sub: [
-          { label: 'Impresión FDM', href: root + 'impresion-3d/index.html' },
-          { label: 'Diseño 3D', href: root + 'impresion-3d/index.html' },
-          { label: 'Materiales para impresión', href: root + 'materiales/index.html' },
-          { label: 'Software relacionado', href: root + 'software/index.html' }
+          { label: 'Impresión FDM', href: root + 'impresion-3d/' },
+          { label: 'Diseño 3D', href: root + 'impresion-3d/' },
+          { label: 'Materiales para impresión', href: root + 'materiales/' },
+          { label: 'Software relacionado', href: root + 'software/' }
         ]
       },
       {
         label: 'Inyección de Plástico',
-        href: root + 'inyeccion-de-plastico/index.html',
+        href: root + 'inyeccion-de-plastico/',
         sub: [
-          { label: 'Inyección de alto volumen', href: root + 'inyeccion-de-plastico/index.html' },
-          { label: 'Inyección de bajo volumen', href: root + 'inyeccion-de-plastico/index.html' }
+          { label: 'Inyección de alto volumen', href: root + 'inyeccion-de-plastico/' },
+          { label: 'Inyección de bajo volumen', href: root + 'inyeccion-de-plastico/' }
         ]
       },
       {
         label: 'Aplicaciones',
-        href: root + 'aplicaciones/index.html',
+        href: root + 'aplicaciones/',
         sub: [
-          { label: 'Creación rápida de prototipos', href: root + 'aplicaciones/index.html' },
-          { label: 'Fabricación de piezas de uso final', href: root + 'aplicaciones/index.html' }
+          { label: 'Creación rápida de prototipos', href: root + 'aplicaciones/' },
+          { label: 'Fabricación de piezas de uso final', href: root + 'aplicaciones/' }
         ]
       },
       {
         label: 'Industria',
-        href: root + 'industria/index.html',
+        href: root + 'industria/',
         sub: [
-          { label: 'Ingeniería', href: root + 'industria/index.html' },
-          { label: 'Fabricación', href: root + 'industria/index.html' }
+          { label: 'Ingeniería', href: root + 'industria/' },
+          { label: 'Fabricación', href: root + 'industria/' }
         ]
       },
       {
         label: 'Servicios',
-        href: root + 'servicios/index.html',
+        href: root + 'servicios/',
         sub: [
-          { label: 'Prototipado rápido', href: root + 'servicios/index.html' },
-          { label: 'Fabricación de piezas funcionales', href: root + 'servicios/index.html' },
-          { label: 'Asesoría técnica', href: root + 'servicios/index.html' },
-          { label: 'Solicitar cotización', href: root + 'contacto/index.html' }
+          { label: 'Prototipado rápido', href: root + 'servicios/' },
+          { label: 'Fabricación de piezas funcionales', href: root + 'servicios/' },
+          { label: 'Asesoría técnica', href: root + 'servicios/' },
+          { label: 'Solicitar cotización', href: root + 'contacto/' }
         ]
       },
       {
         label: 'Contacto',
-        href: root + 'contacto/index.html',
+        href: root + 'contacto/',
         sub: null
       }
     ];
@@ -203,7 +203,7 @@
       }
     });
 
-    html += '<div class="df-mob-cta"><a href="' + root + 'contacto/index.html">Solicitar cotización</a></div>';
+    html += '<div class="df-mob-cta"><a href="' + root + 'contacto/">Solicitar cotización</a></div>';
 
     d.innerHTML = html;
     return d;
@@ -291,29 +291,14 @@
   function init() {
     // Inject CSS link if not already present
     if (!document.getElementById('df-header-css')) {
-      /* Figure out path to dualform-header.css relative to the current page */
-      var cssPath = window.location.pathname;
-      var parts   = cssPath.split('/');
-      var fcIdx   = parts.indexOf('formlabs.com');
-      var depth   = fcIdx !== -1 ? parts.length - fcIdx - 2 : 0;
-      var pfx     = '';
-      for (var i = 0; i < depth; i++) pfx += '../';
+      var pfx     = getSiteRoot();
 
       var link    = document.createElement('link');
       link.id     = 'df-header-css';
       link.rel    = 'stylesheet';
-      link.href   = pfx + 'dualform-header.css';
+      link.href   = pfx + 'dualform-header.css?v=6';
       document.head.insertBefore(link, document.head.firstChild);
     }
-
-    // Determine prefix for links
-    var cssPath2 = window.location.pathname;
-    var parts2   = cssPath2.split('/');
-    var fcIdx2   = parts2.indexOf('formlabs.com');
-    var depth2   = fcIdx2 !== -1 ? parts2.length - fcIdx2 - 2 : 0;
-    var pfx2     = '';
-    for (var j = 0; j < depth2; j++) pfx2 += '../';
-    var root2    = pfx2 || './';
 
     var built  = buildHeader();
     var header = built.header;
