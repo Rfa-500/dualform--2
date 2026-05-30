@@ -63,15 +63,6 @@
     document.body.classList.add('df-hero-ready');
   }
 
-
-  function safeStep(fn) {
-    try {
-      fn();
-    } catch (err) {
-      if (window.console && console.warn) console.warn('Dualform override step skipped:', err);
-    }
-  }
-
   /* ─────────────────────────────────────────────────────────
      1. DROPDOWN HOVER — JS reinforcement (CSS does most work)
   ───────────────────────────────────────────────────────── */
@@ -878,23 +869,6 @@
      RUN
   ───────────────────────────────────────────────────────── */
   function run() {
-    markHeroReady();
-    [
-      fixDropdowns,
-      injectHeroTitle,
-      injectHeroBackground,
-      translateHeroButtons,
-      deactivateIndustryCards,
-      injectSectorsSection,
-      hideLegacySections,
-      sweepLegacy,
-      injectServiciosSection,
-      injectTecnologiasFab,
-      injectMateriales,
-      injectNuestrasTecnologias,
-      injectCTA,
-      replaceFooter
-    ].forEach(safeStep);
     fixDropdowns();
     injectHeroTitle();
     injectHeroBackground();
@@ -921,14 +895,6 @@
   // Re-sweep after Next.js hydration renders late content
   [300, 800, 1500, 3000].forEach(function(ms) {
     setTimeout(function() {
-      markHeroReady();
-      [
-        sweepLegacy,
-        injectHeroTitle,
-        injectHeroBackground,
-        translateHeroButtons,
-        injectSectorsSection
-      ].forEach(safeStep);
       sweepLegacy();
       injectHeroTitle();
       injectHeroBackground();
