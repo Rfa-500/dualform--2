@@ -152,13 +152,13 @@
   ───────────────────────────────────────────────────────── */
 
   var SECTOR_CARDS = [
-    { name: 'Ingeniería',             img: 'Ingeniería.png' },
-    { name: 'Prototipado',            img: 'Prototipado.png' },
-    { name: 'Piezas funcionales',     img: 'Piezas funcionales.png' },
-    { name: 'Fabricación',            img: 'Fabricación.png' },
+    { name: 'Ingeniería',             img: '/New images web Last images/Ingeniería y producto.png' },
+    { name: 'Prototipado',            img: '/New images web Last images/Prototipado rápido Creación rápida de prototipos.png' },
+    { name: 'Piezas funcionales',     img: '/New images web Last images/Piezas de uso final Fabricación de piezas de uso final.png' },
+    { name: 'Fabricación',            img: '/New images web Last images/Fabricación industrial.png' },
     { name: 'Moldes',                 img: 'Moldes.png' },
-    { name: 'Desarrollo de producto', img: 'Desarrollo de producto.png' },
-    { name: 'Producción',             img: 'Production.png' }
+    { name: 'Desarrollo de producto', img: '/New images web Last images/Desarrollo de producto.png' },
+    { name: 'Producción',             img: '/New images web Last images/Producción industrial.png' }
   ];
 
   function injectSectorsSection() {
@@ -170,7 +170,7 @@
 
     var cardsHTML = SECTOR_CARDS.map(function(s) {
       return '<div class="df-sector-card">'
-        + '<div class="df-sector-icon df-sector-icon--img"><img src="Resources-Img-Vid/Vectores/' + s.img + '" alt="' + s.name + '" onerror="this.style.display=\'none\'"></div>'
+        + '<div class="df-sector-icon df-sector-icon--img"><img src="' + s.img + '" alt="' + s.name + '" onerror="this.style.display=\'none\'"></div>'
         + '<div class="df-sector-name">' + s.name + '</div>'
         + '</div>';
     }).join('');
@@ -206,6 +206,7 @@
         title: 'Impresión 3D',
         desc:  'Fabricación de piezas en plástico de alta precisión usando FDM, SLA y SLS. Ideal para prototipos y piezas funcionales.',
         href:  getSiteRoot() + 'impresion-3d/',
+        img:   '/New images web Last images/Impresión FDM.png',
         img:   'Resources-Img-Vid/Machines%20good/3d%20final.png',
         icon:  '<path d="M6 9V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><rect x="2" y="9" width="20" height="13" rx="2"/><line x1="12" y1="13" x2="12" y2="19"/>'
       },
@@ -213,6 +214,7 @@
         title: 'Inyección de Plástico',
         desc:  'Producción de piezas plásticas en volúmenes medianos y altos con excelente acabado superficial y repetibilidad.',
         href:  getSiteRoot() + 'inyeccion-de-plastico/',
+        img:   '/New images web Last images/Inyección de plástico.png',
         img:   'Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png',
         icon:  '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>'
       },
@@ -220,28 +222,28 @@
         title: 'Dise\u00f1o 3D',
         desc:  'Modelado CAD profesional y dise\u00f1o orientado a manufactura (DFM). Del concepto al archivo listo para producci\u00f3n.',
         href:  getSiteRoot() + 'servicios/',
-        img:   '',
+        img:   '/New images web Last images/Diseño 3D Diseño CAD 3D.png',
         icon:  '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
       },
       {
         title: 'Prototipado R\u00e1pido',
         desc:  'Del concepto al prototipo f\u00edsico en horas. Validamos forma, ajuste y funci\u00f3n antes de comprometerte con herramienta.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Prototipo.png',
+        img:   '/New images web Last images/Prototipado rápido Creación rápida de prototipos.png',
         icon:  '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
       },
       {
         title: 'Piezas Funcionales',
         desc:  'Producci\u00f3n de piezas listas para uso final con los materiales y procesos \u00f3ptimos para cada aplicaci\u00f3n industrial.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Pieza final.png',
+        img:   '/New images web Last images/Piezas de uso final Fabricación de piezas de uso final.png',
         icon:  '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/>'
       },
       {
         title: 'Selecci\u00f3n de Materiales',
         desc:  'Asesor\u00eda en la elecci\u00f3n del material \u00f3ptimo seg\u00fan requerimientos mec\u00e1nicos, t\u00e9rmicos, qu\u00edmicos o est\u00e9ticos.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Materiales.png',
+        img:   '/New images web Last images/Materiales especializados.png',
         icon:  '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'
       }
     ];
@@ -259,14 +261,14 @@
           + '<span class="df-serv-num">' + num + '</span>'
           + '<div class="df-serv-card-icon" style="display:none">'
           + svgIcon(s.icon)
-          + '<span class="df-serv-placeholder-label">Imagen pr\u00f3ximamente</span>'
+          + '<span class="df-serv-placeholder-label"></span>'
           + '</div>';
       } else {
         imgContent =
           '<span class="df-serv-num">' + num + '</span>'
           + '<div class="df-serv-card-icon">'
           + svgIcon(s.icon)
-          + '<span class="df-serv-placeholder-label">Imagen pr\u00f3ximamente</span>'
+          + '<span class="df-serv-placeholder-label"></span>'
           + '</div>';
       }
       return '<div class="df-serv-card">'
@@ -424,6 +426,8 @@
     var anchor = document.getElementById('df-servicios-section');
 
     var cards = [
+      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/New images web Last images/Impresión FDM.png', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
+      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/New images web Last images/Inyección de plástico.png', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
       { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/Resources-Img-Vid/Machines%20good/3d%20final.png', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
       { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
     ];
