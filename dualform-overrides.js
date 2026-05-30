@@ -43,6 +43,22 @@
     arrow:   '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>'
   };
 
+  var HERO_IMAGE_SRC = '/Resources-Img-Vid/Vectores/image%20(1).png';
+
+  function injectHeroBackground() {
+    var bg = document.querySelector('.Box_box__aYil_.Box_dark__S8Dzc.Box_has-background-media__yRTEA .box_background');
+    if (!bg || bg.querySelector('.df-hero-bg-img')) return;
+
+    var img = new Image();
+    img.className = 'df-hero-bg-img';
+    img.alt = '';
+    img.decoding = 'async';
+    img.onload = function() { bg.classList.add('df-hero-bg-ready'); };
+    img.onerror = function() { img.remove(); };
+    img.src = HERO_IMAGE_SRC;
+    bg.appendChild(img);
+  }
+
   /* ─────────────────────────────────────────────────────────
      1. DROPDOWN HOVER — JS reinforcement (CSS does most work)
   ───────────────────────────────────────────────────────── */
@@ -432,14 +448,14 @@
      7. INJECT â€” Materiales y aplicaciones (dual-tech selector)
   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   var matData3D = {
-    'PLA':{'tag':'Biodegradable · Rígido','title':'PLA — Ácido Poliláctico','desc':'Material de entrada ideal para prototipos de forma, maquetas y piezas de baja carga. Fácil de imprimir, buena definición de detalles.','adv':['Fácil de imprimir','Biodegradable','Bajo costo','Buena definición de detalles'],'apps':['Prototipos de forma y ajuste','Maquetas de presentación','Modelos educativos','Piezas decorativas']},
-    'PETG':{'tag':'Semi-rígido · Resistente','title':'PETG — Tereftalato de Polietileno','desc':'Excelente balance entre rigidez y tenacidad. Resistente a la humedad, translúcido, ideal para contenedores y piezas funcionales.','adv':['Resistente a la humedad','Translúcido disponible','Buena adhesión entre capas','Apto uso alimentario'],'apps':['Contenedores y tapas','Protectores de piezas','Piezas de uso final','Uso alimentario grado']},
-    'ABS':{'tag':'Rígido · Alta temperatura','title':'ABS — Acrilonitrilo Butadieno Estireno','desc':'Material técnico con alta resistencia al impacto y buenas propiedades mecánicas. Compatible con acabados superficiales.','adv':['Alta resistencia al impacto','Mecanizable y pintable','Acabado con acetona','Buena relación precio-desempeño'],'apps':['Carcasas técnicas','Piezas mecanizadas','Componentes automotrices','Prototipos funcionales']},
-    'TPU':{'tag':'Flexible · Elástico','title':'TPU — Poliuretano Termoplástico','desc':'Material flexible ideal para juntas, sellos, protectores de impacto y piezas que requieren elasticidad sin perder resistencia.','adv':['Alta flexibilidad','Resistente a la abrasión','Elasticidad duradera','Agarre ergonómico'],'apps':['Juntas y sellos','Mangos ergonómicos','Protectores de golpes','Ajuste a presión']},
-    'Nylon / PA':{'tag':'Alta resistencia · Técnico','title':'Nylon / Poliamida (PA)','desc':'Excelente resistencia mecánica, tenacidad y resistencia química para piezas industriales de uso final.','adv':['Alta resistencia mecánica','Resistencia química','Bajo coeficiente de fricción','Duradero'],'apps':['Engranajes y poleas','Bujes y rodamientos','Piezas estructurales','Componentes de maquinaria']},
-    'Resinas técnicas':{'tag':'Alta precisión · SLA','title':'Resinas técnicas SLA','desc':'Alta resolución para piezas con detalle fino, superficies suaves y propiedades mecánicas específicas por formulación.','adv':['Altísima resolución','Superficies suaves','Amplia gama de propiedades','Detalle fino'],'apps':['Prototipos de alta fidelidad','Joyería y detalle fino','Odontología y medicina','Óptica y transparentes']},
-    'Alta temperatura':{'tag':'PEEK · PPS · PC','title':'Materiales de alta temperatura','desc':'Polímeros de alto rendimiento que mantienen propiedades mecánicas y dimensionales a temperaturas superiores a 150°C.','adv':['Estabilidad >150°C','Alta rigidez térmica','Resistencia química','Baja deformación'],'apps':['Componentes cerca de motores','Piezas automotrices','Conectores eléctricos','Utillajes de producción']},
-    'Flexibles':{'tag':'TPE · Silicona · Goma','title':'Materiales flexibles','desc':'Formulaciones blandas para absorción de impactos, sellado hermético o movimiento repetitivo.','adv':['Absorción de impactos','Sellado hermético','Movimiento repetitivo','Tacto suave'],'apps':['Sellos y empaquetaduras','Piezas amortiguadoras','Suelas y agarre','Protectores de equipos']}
+    'PLA':{'img':'/Resources-Img-Vid/Vectores/Ácido%20poliláctico%20—%20PLA.png','tag':'Biodegradable · Rígido','title':'PLA — Ácido Poliláctico','desc':'Material de entrada ideal para prototipos de forma, maquetas y piezas de baja carga. Fácil de imprimir, buena definición de detalles.','adv':['Fácil de imprimir','Biodegradable','Bajo costo','Buena definición de detalles'],'apps':['Prototipos de forma y ajuste','Maquetas de presentación','Modelos educativos','Piezas decorativas']},
+    'PETG':{'img':'/Resources-Img-Vid/Vectores/Tereftalato%20de%20polietileno%20—%20PETG.png','tag':'Semi-rígido · Resistente','title':'PETG — Tereftalato de Polietileno','desc':'Excelente balance entre rigidez y tenacidad. Resistente a la humedad, translúcido, ideal para contenedores y piezas funcionales.','adv':['Resistente a la humedad','Translúcido disponible','Buena adhesión entre capas','Apto uso alimentario'],'apps':['Contenedores y tapas','Protectores de piezas','Piezas de uso final','Uso alimentario grado']},
+    'ABS':{'img':'/Resources-Img-Vid/Vectores/Acrilonitrilo%20butadieno%20estireno%20—%20ABS.png','tag':'Rígido · Alta temperatura','title':'ABS — Acrilonitrilo Butadieno Estireno','desc':'Material técnico con alta resistencia al impacto y buenas propiedades mecánicas. Compatible con acabados superficiales.','adv':['Alta resistencia al impacto','Mecanizable y pintable','Acabado con acetona','Buena relación precio-desempeño'],'apps':['Carcasas técnicas','Piezas mecanizadas','Componentes automotrices','Prototipos funcionales']},
+    'TPU':{'img':'/Resources-Img-Vid/Vectores/Poliuretano%20termoplástico%20—%20TPU.png','tag':'Flexible · Elástico','title':'TPU — Poliuretano Termoplástico','desc':'Material flexible ideal para juntas, sellos, protectores de impacto y piezas que requieren elasticidad sin perder resistencia.','adv':['Alta flexibilidad','Resistente a la abrasión','Elasticidad duradera','Agarre ergonómico'],'apps':['Juntas y sellos','Mangos ergonómicos','Protectores de golpes','Ajuste a presión']},
+    'Nylon / PA':{'img':'/Resources-Img-Vid/Vectores/Nylon%20PA.png','tag':'Alta resistencia · Técnico','title':'Nylon / Poliamida (PA)','desc':'Excelente resistencia mecánica, tenacidad y resistencia química para piezas industriales de uso final.','adv':['Alta resistencia mecánica','Resistencia química','Bajo coeficiente de fricción','Duradero'],'apps':['Engranajes y poleas','Bujes y rodamientos','Piezas estructurales','Componentes de maquinaria']},
+    'Resinas técnicas':{'img':'/Resources-Img-Vid/Vectores/Resinas%20técnicas%20SLA.png','tag':'Alta precisión · SLA','title':'Resinas técnicas SLA','desc':'Alta resolución para piezas con detalle fino, superficies suaves y propiedades mecánicas específicas por formulación.','adv':['Altísima resolución','Superficies suaves','Amplia gama de propiedades','Detalle fino'],'apps':['Prototipos de alta fidelidad','Joyería y detalle fino','Odontología y medicina','Óptica y transparentes']},
+    'Alta temperatura':{'img':'/Resources-Img-Vid/Vectores/Alta%20temperatura.png','tag':'PEEK · PPS · PC','title':'Materiales de alta temperatura','desc':'Polímeros de alto rendimiento que mantienen propiedades mecánicas y dimensionales a temperaturas superiores a 150°C.','adv':['Estabilidad >150°C','Alta rigidez térmica','Resistencia química','Baja deformación'],'apps':['Componentes cerca de motores','Piezas automotrices','Conectores eléctricos','Utillajes de producción']},
+    'Flexibles':{'img':'/Resources-Img-Vid/Vectores/Flexibles.png','tag':'TPE · Silicona · Goma','title':'Materiales flexibles','desc':'Formulaciones blandas para absorción de impactos, sellado hermético o movimiento repetitivo.','adv':['Absorción de impactos','Sellado hermético','Movimiento repetitivo','Tacto suave'],'apps':['Sellos y empaquetaduras','Piezas amortiguadoras','Suelas y agarre','Protectores de equipos']}
   };
 
   var matDataIny = {
@@ -566,10 +582,13 @@
   function buildMatPanel(d, vecPfx) {
     var adv = (d.adv || []).map(function(a) { return '<li>' + a + '</li>'; }).join('');
     var apps = (d.apps || []).map(function(a) { return '<li>' + a + '</li>'; }).join('');
-    var imgHtml = '<div class="df-mat-placeholder"><span>Imagen próximamente</span></div>';
+    var imgHtml = d.img
+      ? '<img class="df-mat-photo" src="' + d.img + '" alt="' + d.title + '" loading="lazy" decoding="async" onerror="this.parentNode.classList.remove(\'df-mat-img--photo\');this.outerHTML=\'<div class=&quot;df-mat-placeholder&quot;><span>Imagen próximamente</span></div>\'">'
+      : '<div class="df-mat-placeholder"><span>Imagen próximamente</span></div>';
+    var imgClass = 'df-mat-img' + (d.img ? ' df-mat-img--photo' : '');
 
     return '<div class="df-mat-left">'
-      + '<div class="df-mat-img">' + imgHtml + '</div>'
+      + '<div class="' + imgClass + '">' + imgHtml + '</div>'
       + '</div>'
       + '<div class="df-mat-right">'
       + '<span class="df-mat-tag">' + d.tag + '</span>'
@@ -843,6 +862,7 @@
   function run() {
     fixDropdowns();
     injectHeroTitle();
+    injectHeroBackground();
     translateHeroButtons();
     deactivateIndustryCards();
     injectSectorsSection();
@@ -867,6 +887,7 @@
     setTimeout(function() {
       sweepLegacy();
       injectHeroTitle();
+      injectHeroBackground();
       translateHeroButtons();
       injectSectorsSection();
     }, ms);
