@@ -15,3 +15,4 @@ http://localhost:8080/
 ```
 
 Evita abrir `index.html` con doble clic para validar navegación, porque las rutas absolutas de producción como `/contacto/` pueden resolverse contra la raíz del sistema de archivos en modo `file://`.
+
