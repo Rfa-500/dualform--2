@@ -1,12 +1,21 @@
 /* dualform-page-common.js v2 — premium footer + chip helper */
 (function() {
 
+  function getSiteRoot() {
+    if (window.location.protocol !== 'file:') return '/';
+
+    var script = document.currentScript || document.querySelector('script[src*="dualform-page-common.js"]');
+    var src = script ? script.getAttribute('src') || '' : '';
+    var cleanSrc = src.split('?')[0];
+    if (cleanSrc && cleanSrc.indexOf('/') !== -1) return cleanSrc.slice(0, cleanSrc.lastIndexOf('/') + 1);
+    return './';
+  }
   /* ── Premium Footer (matches home #df-footer) ─────────────── */
   function buildFooter() {
     var f = document.getElementById('df-footer');
     if (!f) return;
     var yr = new Date().getFullYear();
-    var pfx = '../';
+    var pfx = getSiteRoot();
 
     f.outerHTML =
       '<footer id="df-footer">' +
@@ -14,7 +23,7 @@
           '<div class="df-ft-top">' +
             // Brand column
             '<div class="df-ft-brand">' +
-              '<a class="df-ft-logo" href="' + pfx + 'index.html" title="Dualform">' +
+              '<a class="df-ft-logo" href="' + pfx + '" title="Dualform">' +
                 '<img src="' + pfx + 'Resources-Img-Vid/Dualform_logo_background_removed.png" alt="Dualform" class="df-ft-logo-img">' +
               '</a>' +
               '<div class="df-ft-brand-bar"></div>' +
@@ -27,21 +36,21 @@
             '</div>' +
             // Services column
             '<div class="df-ft-col"><h4>Servicios</h4><ul>' +
-              '<li><a href="' + pfx + 'impresion-3d/index.html">Impresi\u00f3n 3D</a></li>' +
-              '<li><a href="' + pfx + 'inyeccion-de-plastico/index.html">Inyecci\u00f3n de pl\u00e1stico</a></li>' +
-              '<li><a href="' + pfx + 'servicios/index.html">Dise\u00f1o 3D</a></li>' +
-              '<li><a href="' + pfx + 'servicios/index.html">Prototipado r\u00e1pido</a></li>' +
+              '<li><a href="' + pfx + 'impresion-3d/">Impresi\u00f3n 3D</a></li>' +
+              '<li><a href="' + pfx + 'inyeccion-de-plastico/">Inyecci\u00f3n de pl\u00e1stico</a></li>' +
+              '<li><a href="' + pfx + 'servicios/">Dise\u00f1o 3D</a></li>' +
+              '<li><a href="' + pfx + 'servicios/">Prototipado r\u00e1pido</a></li>' +
             '</ul></div>' +
             // Pages column
             '<div class="df-ft-col"><h4>P\u00e1ginas</h4><ul>' +
-              '<li><a href="' + pfx + 'aplicaciones/index.html">Aplicaciones</a></li>' +
-              '<li><a href="' + pfx + 'industria/index.html">Industria</a></li>' +
-              '<li><a href="' + pfx + 'materiales/index.html">Materiales</a></li>' +
+              '<li><a href="' + pfx + 'aplicaciones/">Aplicaciones</a></li>' +
+              '<li><a href="' + pfx + 'industria/">Industria</a></li>' +
+              '<li><a href="' + pfx + 'materiales/">Materiales</a></li>' +
             '</ul></div>' +
             // Contact column
             '<div class="df-ft-col"><h4>Contacto</h4><ul>' +
-              '<li><a href="' + pfx + 'contacto/index.html">Solicitar cotizaci\u00f3n</a></li>' +
-              '<li><a href="' + pfx + 'contacto/index.html">Soporte t\u00e9cnico</a></li>' +
+              '<li><a href="' + pfx + 'contacto/">Solicitar cotizaci\u00f3n</a></li>' +
+              '<li><a href="' + pfx + 'contacto/">Soporte t\u00e9cnico</a></li>' +
               '<li><span>contacto@dualform.mx</span></li>' +
               '<li><span>+52 (55) 0000-0000</span></li>' +
             '</ul></div>' +
