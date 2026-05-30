@@ -220,7 +220,7 @@
         title: 'Dise\u00f1o 3D',
         desc:  'Modelado CAD profesional y dise\u00f1o orientado a manufactura (DFM). Del concepto al archivo listo para producci\u00f3n.',
         href:  getSiteRoot() + 'servicios/',
-        img:   '/Resources-Img-Vid/New images web Last images/Diseño 3D  Diseño CAD 3D.png',
+        img:   '',
         icon:  '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
       },
       {
