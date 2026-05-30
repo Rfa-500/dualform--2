@@ -53,6 +53,8 @@
               '<li><a href="' + pfx + 'contacto/">Soporte t\u00e9cnico</a></li>' +
               '<li><span>Dualformindustries@gmail.com</span></li>' +
               '<li><span>+507 63063129</span></li>' +
+              '<li><span>contacto@dualform.mx</span></li>' +
+              '<li><span>+52 (55) 0000-0000</span></li>' +
             '</ul></div>' +
           '</div>' +
           '<hr class="df-ft-divider">' +
