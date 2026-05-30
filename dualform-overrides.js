@@ -589,19 +589,16 @@
     var anchor = document.getElementById('df-materiales');
 
     var LOGOS = [
-      { name: 'Diseño MX',        initials: 'DM', color: '#0f1f3d' },
-      { name: 'Grupo Manufactura', initials: 'GM', color: '#1a3a5c' },
-      { name: 'Tech Parts Co.',   initials: 'TP', color: '#2a1040' },
-      { name: 'Plásticos Norte',  initials: 'PN', color: '#1a2010' },
-      { name: 'Innovación 3D',    initials: 'I3', color: '#3a1818' },
-      { name: 'Moldes Precisión', initials: 'MP', color: '#0a2030' },
+      { name: 'DNORD',  src: '/Resources-Img-Vid/Vectores/DNORDLOGO.png' },
+      { name: 'NORD',   src: '/Resources-Img-Vid/Vectores/NORDLOGO.png' },
+      { name: 'GLOBAL', src: '/Resources-Img-Vid/Vectores/GLOBALLOGO.png' },
+      { name: 'JMJ',    src: '/Resources-Img-Vid/Vectores/JMJLOGO.png' }
     ];
 
-    // Double for infinite loop
+    // Double for continuous infinite-loop scrolling with the four real logos.
     function logoCard(l) {
-      return '<div class="df-logo-card">'
-        + '<div class="df-logo-placeholder" style="background:linear-gradient(135deg,' + l.color + ' 0%,#555 100%)">' + l.initials + '</div>'
-        + '<span class="df-logo-name">' + l.name + '</span>'
+      return '<div class="df-logo-card" aria-label="' + l.name + '">'
+        + '<img class="df-logo-img" src="' + l.src + '" alt="' + l.name + '" loading="lazy" decoding="async" onerror="this.closest(\'.df-logo-card\').style.display=\'none\'">'
         + '</div>';
     }
     var logosHTML = LOGOS.concat(LOGOS).map(logoCard).join('');
