@@ -612,17 +612,19 @@
     var anchor = document.getElementById('df-materiales');
 
     var LOGOS = [
-      { name: 'DNORD',  src: '/Resources-Img-Vid/Vectores/DNORDLOGO.png' },
-      { name: 'NORD',   src: '/Resources-Img-Vid/Vectores/NORDLOGO.png' },
-      { name: 'GLOBAL', src: '/Resources-Img-Vid/Vectores/GLOBALLOGO.png' },
-      { name: 'JMJ',    src: '/Resources-Img-Vid/Vectores/JMJLOGO.png' }
+      { name: 'Distribuidora Nord', src: '/Resources-Img-Vid/Vectores/DNORDLOGO.png', href: 'https://www.instagram.com/distribuidoranord/', dark: true },
+      { name: 'NORD azul', src: '/Resources-Img-Vid/Vectores/NORDLOGO.png', href: 'https://www.facebook.com/persianasnord' },
+      { name: 'Global Shade Supplier', src: '/Resources-Img-Vid/Vectores/GLOBALLOGO.png', href: 'https://www.instagram.com/globalshadessupplier/' },
+      { name: 'JMJ Toldos y Persianas', src: '/Resources-Img-Vid/Vectores/JMJLOGO.png', href: 'https://www.toldosjmj.com/' }
     ];
 
     // Double for continuous infinite-loop scrolling with the four real logos.
     function logoCard(l) {
-      return '<div class="df-logo-card" aria-label="' + l.name + '">'
-        + '<img class="df-logo-img" src="' + l.src + '" alt="' + l.name + '" loading="lazy" decoding="async" onerror="this.closest(\'.df-logo-card\').style.display=\'none\'">'
-        + '</div>';
+      var style = 'cursor:pointer;';
+      if (l.dark) style += 'background:linear-gradient(135deg,#050505 0%,#171717 100%);border-color:rgba(255,255,255,0.12);';
+      return '<a class="df-logo-card' + (l.dark ? ' df-logo-card--dark' : '') + '" href="' + l.href + '" target="_blank" rel="noopener noreferrer" aria-label="' + l.name + '" style="' + style + '">'
+        + "<img class=\"df-logo-img\" src=\"" + l.src + "\" alt=\"" + l.name + "\" loading=\"lazy\" decoding=\"async\" onerror=\"this.closest('.df-logo-card').style.display='none'\">"
+        + '</a>';
     }
     var logosHTML = LOGOS.concat(LOGOS).map(logoCard).join('');
 
@@ -642,16 +644,26 @@
     if (anchor) anchor.insertAdjacentElement('afterend', sec);
     else document.body.appendChild(sec);
 
-    // Auto-scroll logos
+    // Auto-scroll logos continuously; pause only while hovering a logo/card.
     setTimeout(function() {
       var track = document.getElementById('df-logos-track');
       if (!track) return;
       var isPaused = false;
-      track.addEventListener('mouseenter', function() { isPaused = true; });
-      track.addEventListener('mouseleave', function() { isPaused = false; });
-      function scrollLogos() {
+      var lastTime = null;
+      var speed = 36; // pixels per second
+
+      track.querySelectorAll('.df-logo-card').forEach(function(card) {
+        card.addEventListener('mouseenter', function() { isPaused = true; });
+        card.addEventListener('mouseleave', function() { isPaused = false; lastTime = null; });
+      });
+
+      function scrollLogos(timestamp) {
+        if (lastTime === null) lastTime = timestamp;
+        var delta = timestamp - lastTime;
+        lastTime = timestamp;
+
         if (!isPaused) {
-          track.scrollLeft += 0.5;
+          track.scrollLeft += (speed * delta) / 1000;
           if (track.scrollLeft >= track.scrollWidth / 2) {
             track.scrollLeft -= track.scrollWidth / 2;
           }
