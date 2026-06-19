@@ -264,6 +264,17 @@
     });
   }
 
+  /* ── Basic external-link hardening ─────────────────────── */
+  function hardenExternalLinks() {
+    document.querySelectorAll('a[target="_blank"]').forEach(function (link) {
+      var rel = (link.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+      ['noopener', 'noreferrer'].forEach(function (token) {
+        if (rel.indexOf(token) === -1) rel.push(token);
+      });
+      link.setAttribute('rel', rel.join(' '));
+    });
+  }
+
   /* ── Hide old Formlabs header ──────────────────────────── */
   function hideOldHeader() {
     /* The original Formlabs nav has class "Header_header__WTZds" and the
@@ -314,6 +325,9 @@
 
     // Hide old Formlabs navbar
     hideOldHeader();
+
+    // Harden any legacy/new tabs without changing URLs or layout
+    hardenExternalLinks();
 
     // Events
     initMobileAccordion(drawer);

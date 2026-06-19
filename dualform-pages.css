@@ -206,6 +206,24 @@ a  { text-decoration: none; color: inherit; }
   border-color: rgba(232,82,26,0.2);
 }
 .df-placeholder--video .df-placeholder-icon { background: rgba(232,82,26,0.2); }
+.df-card-image {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 0;
+}
+.df-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.df-card-image--app { height: 220px; }
+.df-card-image--industry, .df-card-image--service, .df-card-image--software { height: 200px; }
+.df-card-image--capability { height: 260px; }
+.df-card-image--process { height: 340px; }
+.df-card-image--software-hero { height: 360px; }
 
 /* ── Cards ───────────────────────────────────────────── */
 .df-cards-grid {
