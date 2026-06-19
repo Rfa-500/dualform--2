@@ -146,6 +146,39 @@
     });
   }
 
+
+  function injectSeoIntro() {
+    if (document.getElementById('df-seo-intro')) return;
+
+    var heroCta = document.querySelector('.WhitePaperCta_layout__s91ex, .WhitePaperCta_wrapper__3qC_Y');
+    var heroSection = heroCta && heroCta.closest ? heroCta.closest('section') : null;
+    var fallback = document.getElementById('industries') || document.getElementById('featured-products') || document.getElementById('main');
+    var root = getSiteRoot();
+
+    var sec = document.createElement('section');
+    sec.id = 'df-seo-intro';
+    sec.setAttribute('aria-labelledby', 'df-seo-intro-title');
+    sec.innerHTML = ''
+      + '<div class="df-seo-intro-inner">'
+      + '<p class="df-seo-eyebrow">Fabricación digital en Panamá</p>'
+      + '<h2 id="df-seo-intro-title">Impresión 3D, inyección de plástico y prototipado para productos reales</h2>'
+      + '<p class="df-seo-lead">Dualform es una empresa en Panamá especializada en impresión 3D, inyección de plástico, diseño 3D, prototipado y fabricación de piezas funcionales para empresas, industrias, emprendedores y desarrolladores de producto.</p>'
+      + '<nav class="df-seo-links" aria-label="Servicios principales de Dualform">'
+      + '<a href="' + root + 'impresion-3d/">Impresión 3D</a>'
+      + '<a href="' + root + 'inyeccion-de-plastico/">Inyección de plástico</a>'
+      + '<a href="' + root + 'servicios/">Servicios</a>'
+      + '<a href="' + root + 'materiales/">Materiales</a>'
+      + '<a href="' + root + 'contacto/">Contacto</a>'
+      + '</nav>'
+      + '</div>';
+
+    if (heroSection && heroSection.parentNode) {
+      heroSection.insertAdjacentElement('afterend', sec);
+    } else if (fallback && fallback.parentNode) {
+      fallback.parentNode.insertBefore(sec, fallback);
+    }
+  }
+
   /* ─────────────────────────────────────────────────────────
      3. SECTOR CARDS — New 7-card uniform section
         Replaces legacy LinksSection tiles entirely
@@ -880,6 +913,7 @@
     injectHeroBackground();
     translateHeroButtons();
     markHeroReady();
+    injectSeoIntro();
     deactivateIndustryCards();
     injectSectorsSection();
     hideLegacySections();
@@ -906,6 +940,7 @@
       injectHeroBackground();
       translateHeroButtons();
       markHeroReady();
+      injectSeoIntro();
       injectSectorsSection();
     }, ms);
   });
