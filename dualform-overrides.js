@@ -174,6 +174,7 @@
 
     if (heroSection && heroSection.parentNode) {
       heroSection.parentNode.insertBefore(sec, heroSection);
+      heroSection.insertAdjacentElement('afterend', sec);
     } else if (fallback && fallback.parentNode) {
       fallback.parentNode.insertBefore(sec, fallback);
     }

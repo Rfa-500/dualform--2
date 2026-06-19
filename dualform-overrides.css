@@ -1423,6 +1423,7 @@ script[type="application/ld+json"],
 }
 
 /* SEO intro: visible, crawlable summary placed below the header without disrupting hero animations */
+/* SEO intro: visible, crawlable summary placed after the hero without disrupting animations */
 #df-seo-intro {
   position: relative;
   display: block;
