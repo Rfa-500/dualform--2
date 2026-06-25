@@ -776,8 +776,8 @@
       +'<div class="df-ft-bottom">'
         +'<span class="df-ft-copy">&copy; '+yr+' Dualform. Todos los derechos reservados.</span>'
         +'<div class="df-ft-legal">'
-          +'<a href="#">Privacidad</a>'
-          +'<a href="#">Términos de uso</a>'
+          +'<a href="'+ftPfx+'privacidad/">Privacidad</a>'
+          +'<a href="'+ftPfx+'terminos-de-uso/">Términos de uso</a>'
         +'</div>'
       +'</div>'
     +'</div>';

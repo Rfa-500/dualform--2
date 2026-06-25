@@ -60,8 +60,8 @@
           '<div class="df-ft-bottom">' +
             '<span class="df-ft-copy">&copy; ' + yr + ' Dualform. Todos los derechos reservados.</span>' +
             '<div class="df-ft-legal">' +
-              '<a href="#">Privacidad</a>' +
-              '<a href="#">T\u00e9rminos de uso</a>' +
+              '<a href="' + pfx + 'privacidad/">Privacidad</a>' +
+              '<a href="' + pfx + 'terminos-de-uso/">T\u00e9rminos de uso</a>' +
             '</div>' +
           '</div>' +
         '</div>' +
