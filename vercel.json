@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/es/", "destination": "/", "permanent": true },
+    { "source": "/software/dashboard/index.html", "destination": "/software/", "permanent": true },
+    { "source": "/3d-printers/automation/index.html", "destination": "/impresion-3d/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/white-papers/measuring-sls-dimensional-accuracy-and-print-repeatability/", "destination": "/api/gone" },
+    { "source": "/white-papers/reduce-costs-and-lead-times-in-metalworking-with-on-demand-jigs/", "destination": "/api/gone" },
+    { "source": "/white-papers/independently-tested-reliability-form-4/", "destination": "/api/gone" },
+    { "source": "/it/", "destination": "/api/gone" },
+    { "source": "/cn/", "destination": "/api/gone" },
+    { "source": "/kr/", "destination": "/api/gone" },
+    { "source": "/fr/", "destination": "/api/gone" },
+    { "source": "/jp/", "destination": "/api/gone" },
+    { "source": "/de/", "destination": "/api/gone" }
+  ]
+}
