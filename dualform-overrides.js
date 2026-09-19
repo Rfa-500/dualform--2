@@ -768,7 +768,7 @@
           +'<li><a href="'+ftPfx+'contacto/">Solicitar cotizaci\u00f3n</a></li>'
           +'<li><a href="'+ftPfx+'contacto/">Soporte t\u00e9cnico</a></li>'
           +'<li><a href="mailto:Dualformindustries@gmail.com">Dualformindustries@gmail.com</a></li>'
-          +'<li><a href="tel:+50763063129">+507 63063129</a></li>'
+          +'<li><a href="tel:+50760398078">+507 6039-8078</a></li>'
           +'<li><span>Río Abajo, Calle 18, entrando por repuestos mundiales #2 diagonal a grupo CUSA, Panama City, Panama 0000</span></li>'
         +'</ul></div>'
       +'</div>'
