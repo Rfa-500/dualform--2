@@ -43,22 +43,6 @@
     arrow:   '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>'
   };
 
-  var HERO_IMAGE_SRC = '/Resources-Img-Vid/Vectores/image%20(1).png';
-
-  function injectHeroBackground() {
-    var bg = document.querySelector('.Box_box__aYil_.Box_dark__S8Dzc.Box_has-background-media__yRTEA .box_background');
-    if (!bg || bg.querySelector('.df-hero-bg-img')) return;
-
-    var img = new Image();
-    img.className = 'df-hero-bg-img';
-    img.alt = '';
-    img.decoding = 'async';
-    img.onload = function() { bg.classList.add('df-hero-bg-ready'); };
-    img.onerror = function() { img.remove(); };
-    img.src = HERO_IMAGE_SRC;
-    bg.appendChild(img);
-  }
-
   function markHeroReady() {
     document.body.classList.add('df-hero-ready');
   }
@@ -877,7 +861,6 @@
   function run() {
     fixDropdowns();
     injectHeroTitle();
-    injectHeroBackground();
     translateHeroButtons();
     markHeroReady();
     deactivateIndustryCards();
@@ -903,7 +886,6 @@
     setTimeout(function() {
       sweepLegacy();
       injectHeroTitle();
-      injectHeroBackground();
       translateHeroButtons();
       markHeroReady();
       injectSectorsSection();
