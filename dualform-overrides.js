@@ -1,6 +1,34 @@
 (function () {
   'use strict';
 
+  function animateVisible(track, callback) {
+    var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var visible = false;
+    var frameId = 0;
+    function tick(time) {
+      callback(time);
+      frameId = requestAnimationFrame(tick);
+    }
+    function sync() {
+      cancelAnimationFrame(frameId);
+      frameId = 0;
+      if (visible && !motion.matches && !document.hidden && !track.contains(document.activeElement)) frameId = requestAnimationFrame(tick);
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries) {
+        visible = entries[0].isIntersecting;
+        sync();
+      }).observe(track);
+    } else {
+      visible = true;
+      sync();
+    }
+    track.addEventListener('focusin', sync);
+    track.addEventListener('focusout', function() { setTimeout(sync, 0); });
+    motion.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+  }
+
   function getSiteRoot() {
     if (window.location.protocol !== 'file:') return '/';
 
@@ -43,22 +71,6 @@
     arrow:   '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>'
   };
 
-  var HERO_IMAGE_SRC = '/Resources-Img-Vid/Vectores/image%20(1).png';
-
-  function injectHeroBackground() {
-    var bg = document.querySelector('.Box_box__aYil_.Box_dark__S8Dzc.Box_has-background-media__yRTEA .box_background');
-    if (!bg || bg.querySelector('.df-hero-bg-img')) return;
-
-    var img = new Image();
-    img.className = 'df-hero-bg-img';
-    img.alt = '';
-    img.decoding = 'async';
-    img.onload = function() { bg.classList.add('df-hero-bg-ready'); };
-    img.onerror = function() { img.remove(); };
-    img.src = HERO_IMAGE_SRC;
-    bg.appendChild(img);
-  }
-
   function markHeroReady() {
     document.body.classList.add('df-hero-ready');
   }
@@ -85,63 +97,30 @@
      2. HERO — Add Spanish title + translate buttons
   ───────────────────────────────────────────────────────── */
   function injectHeroTitle() {
-    // Only run once
     if (document.getElementById('df-hero-title-injected')) return;
-    var ctaWrapper = document.querySelector('.WhitePaperCta_wrapper__3qC_Y, .WhitePaperCta_layout__s91ex');
-    if (!ctaWrapper) return;
-
+    var layout = document.querySelector('.WhitePaperCta_layout__s91ex');
+    if (!layout) return;
     var titleEl = document.createElement('div');
     titleEl.id = 'df-hero-title-injected';
-    titleEl.innerHTML = '<h1 style="font-family:var(--df-font-global,\'Proxima Nova\',\'Nunito Sans\',sans-serif);font-size:clamp(26px,3.5vw,48px);font-weight:800;color:#ffffff;text-align:center;line-height:1.15;letter-spacing:-0.03em;margin:0 0 28px;text-shadow:0 2px 24px rgba(0,0,0,0.25);max-width:820px;padding:0 20px;">Manufactura 3D e inyección plástica para empresas</h1>';
-
-    // Insert before the CTA buttons wrapper
-    var layout = document.querySelector('.WhitePaperCta_layout__s91ex');
-    if (layout) {
-      layout.insertBefore(titleEl, layout.firstChild);
-    } else {
-      ctaWrapper.parentNode.insertBefore(titleEl, ctaWrapper);
-    }
+    titleEl.innerHTML = '<p class="df-hero-kicker">Manufactura avanzada</p>'
+      + '<h1><span>Manufactura 3D</span> e inyección plástica <span class="df-hero-title-tail">para empresas</span></h1>'
+      + '<p class="df-hero-summary">Soluciones de manufactura aditiva e inyección para cada etapa de tu proyecto.</p>';
+    layout.insertBefore(titleEl, layout.firstChild);
   }
 
   function translateHeroButtons() {
-    document.querySelectorAll('.WhitePaperCta_wrapper__3qC_Y a, .WhitePaperCta_layout__s91ex a').forEach(function (a) {
+    document.querySelectorAll('.WhitePaperCta_layout__s91ex a').forEach(function(a) {
       var sp = a.querySelector('span');
       var txt = (sp || a).textContent.trim();
       if (/explore\s+3d\s+printers/i.test(txt)) {
         (sp || a).textContent = 'Explorar servicios';
         a.href = '#servicios-principales';
         a.removeAttribute('target');
-        // Premium primary (orange) button
-        var baseStyleOrange = 'display:inline-flex;align-items:center;gap:7px;padding:11px 22px;background:linear-gradient(135deg,#E8521A 0%,#c93f0e 100%);color:#fff;font-weight:700;font-size:0.85rem;letter-spacing:0.04em;text-transform:uppercase;border-radius:8px;text-decoration:none;transition:transform 0.18s ease,box-shadow 0.18s ease,background 0.18s ease;box-shadow:0 4px 18px rgba(232,82,26,0.35);margin-top:8px;';
-        a.style.cssText = baseStyleOrange;
-        a.addEventListener('mouseenter', function() {
-          a.style.transform = 'translateY(-2px)';
-          a.style.boxShadow = '0 8px 28px rgba(232,82,26,0.5)';
-          a.style.background = 'linear-gradient(135deg,#F06030 0%,#d94e12 100%)';
-        });
-        a.addEventListener('mouseleave', function() {
-          a.style.transform = '';
-          a.style.boxShadow = '0 4px 18px rgba(232,82,26,0.35)';
-          a.style.background = 'linear-gradient(135deg,#E8521A 0%,#c93f0e 100%)';
-        });
+        a.classList.add('df-hero-cta', 'df-hero-cta-primary');
       } else if (/contact\s+sales/i.test(txt)) {
-        (sp || a).textContent = 'Solicitar cotizaci\u00f3n';
+        (sp || a).textContent = 'Solicitar cotización';
         a.href = getSiteRoot() + 'contacto/';
-        // Premium glass/outline button
-        var baseStyleGlass = 'display:inline-flex;align-items:center;gap:7px;padding:10px 22px;background:rgba(255,255,255,0.08);color:#fff;font-weight:600;font-size:0.85rem;letter-spacing:0.04em;text-transform:uppercase;border-radius:8px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform 0.18s ease,background 0.18s ease,border-color 0.18s ease,box-shadow 0.18s ease;margin-top:8px;';
-        a.style.cssText = baseStyleGlass;
-        a.addEventListener('mouseenter', function() {
-          a.style.transform = 'translateY(-2px)';
-          a.style.background = 'rgba(255,255,255,0.18)';
-          a.style.borderColor = 'rgba(255,255,255,0.65)';
-          a.style.boxShadow = '0 6px 20px rgba(0,0,0,0.25)';
-        });
-        a.addEventListener('mouseleave', function() {
-          a.style.transform = '';
-          a.style.background = 'rgba(255,255,255,0.08)';
-          a.style.borderColor = 'rgba(255,255,255,0.3)';
-          a.style.boxShadow = '';
-        });
+        a.classList.add('df-hero-cta', 'df-hero-cta-secondary');
       }
     });
   }
@@ -169,7 +148,7 @@
     if (!industriesEl) return;
 
     var cardsHTML = SECTOR_CARDS.map(function(s) {
-      return '<div class="df-sector-card">'
+      return '<div class="df-sector-card" role="listitem">'
         + '<div class="df-sector-icon df-sector-icon--img"><img src="Resources-Img-Vid/Vectores/' + s.img + '" alt="' + s.name + '" onerror="this.style.display=\'none\'"></div>'
         + '<div class="df-sector-name">' + s.name + '</div>'
         + '</div>';
@@ -179,7 +158,7 @@
     sec.id = 'df-sectors-section';
     sec.innerHTML = '<div class="df-sectors-inner">'
       + '<div class="df-sectors-label">Sectores de aplicación</div>'
-      + '<div class="df-sectors-grid">' + cardsHTML + '</div>'
+      + '<div class="df-sectors-grid" role="list" tabindex="0" aria-label="Sectores de aplicación">' + cardsHTML + '</div>'
       + '</div>';
 
     industriesEl.insertAdjacentElement('afterend', sec);
@@ -206,42 +185,42 @@
         title: 'Impresión 3D',
         desc:  'Fabricación de piezas en plástico de alta precisión usando FDM, SLA y SLS. Ideal para prototipos y piezas funcionales.',
         href:  getSiteRoot() + 'impresion-3d/',
-        img:   'Resources-Img-Vid/Machines%20good/3d%20final.png',
+        img:   'Resources-Img-Vid/home/printer-p1s.webp',
         icon:  '<path d="M6 9V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><rect x="2" y="9" width="20" height="13" rx="2"/><line x1="12" y1="13" x2="12" y2="19"/>'
       },
       {
         title: 'Inyección de Plástico',
         desc:  'Producción de piezas plásticas en volúmenes medianos y altos con excelente acabado superficial y repetibilidad.',
         href:  getSiteRoot() + 'inyeccion-de-plastico/',
-        img:   'Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png',
+        img:   'Resources-Img-Vid/home/machine-1280.webp',
         icon:  '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>'
       },
       {
         title: 'Dise\u00f1o 3D',
         desc:  'Modelado CAD profesional y dise\u00f1o orientado a manufactura (DFM). Del concepto al archivo listo para producci\u00f3n.',
         href:  getSiteRoot() + 'servicios/',
-        img:   '/Resources-Img-Vid/New images web Last images/Diseño 3D  Diseño CAD 3D.png',
+        img:   '/Resources-Img-Vid/home/diseno-3d-diseno-cad-3d.webp',
         icon:  '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>'
       },
       {
         title: 'Prototipado R\u00e1pido',
         desc:  'Del concepto al prototipo f\u00edsico en horas. Validamos forma, ajuste y funci\u00f3n antes de comprometerte con herramienta.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Prototipo.png',
+        img:   'Resources-Img-Vid/home/prototipo.webp',
         icon:  '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
       },
       {
         title: 'Piezas Funcionales',
         desc:  'Producci\u00f3n de piezas listas para uso final con los materiales y procesos \u00f3ptimos para cada aplicaci\u00f3n industrial.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Pieza final.png',
+        img:   'Resources-Img-Vid/home/pieza-final.webp',
         icon:  '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17.5h7M17.5 14v7"/>'
       },
       {
         title: 'Selecci\u00f3n de Materiales',
         desc:  'Asesor\u00eda en la elecci\u00f3n del material \u00f3ptimo seg\u00fan requerimientos mec\u00e1nicos, t\u00e9rmicos, qu\u00edmicos o est\u00e9ticos.',
         href:  getSiteRoot() + 'servicios/',
-        img:   'Resources-Img-Vid/Extra/Materiales.png',
+        img:   'Resources-Img-Vid/home/materiales.webp',
         icon:  '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'
       }
     ];
@@ -252,7 +231,7 @@
       var imgContent;
       if (s.img) {
         imgContent =
-          '<img src="' + s.img + '" alt="' + s.title + '" class="df-serv-real-img"'
+          '<img src="' + s.img + '" alt="' + s.title + '" class="df-serv-real-img" loading="lazy" decoding="async"'
           + ' onerror="this.style.display=\'none\';this.parentNode.querySelector(\'.df-serv-card-icon\').style.display=\'flex\'"'
           + '>'
           + '<div class="df-serv-img-overlay"></div>'
@@ -378,9 +357,8 @@
           }
           syncDots();
         }
-        requestAnimationFrame(frame);
       }
-      requestAnimationFrame(frame);
+      animateVisible(track, frame);
     }, 500);
   }
 
@@ -424,14 +402,14 @@
     var anchor = document.getElementById('df-servicios-section');
 
     var cards = [
-      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/Resources-Img-Vid/Machines%20good/3d%20final.png', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
-      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/Resources-Img-Vid/Machines%20good/Haitan%20mars%20final.png', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
+      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/Resources-Img-Vid/home/printer-p1s.webp', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
+      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/Resources-Img-Vid/home/machine-1280.webp', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
     ];
 
     var cardsHTML = cards.map(function(c) {
       var advList = c.adv.map(function(a){ return '<li>'+a+'</li>'; }).join('');
       return '<div class="df-tf-card">'
-        +'<div class="df-tf-img"><img src="'+c.img+'" alt="'+c.title+'" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display=\'none\'"><div class="df-tf-img-overlay"></div></div>'
+        +'<div class="df-tf-img"><img src="'+c.img+'" alt="'+c.title+'" loading="lazy" decoding="async" onerror="this.style.display=\'none\'"><div class="df-tf-img-overlay"></div></div>'
         +'<div class="df-tf-body"><h3>'+c.title+'</h3><p>'+c.desc+'</p>'
         +'<ul class="df-tf-advantages">'+advList+'</ul>'
         +'<a class="df-tf-btn" href="'+c.href+'">Ver tecnología '+svgIcon(ICON.arrow)+'</a>'
@@ -452,25 +430,25 @@
      7. INJECT â€” Materiales y aplicaciones (dual-tech selector)
   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   var matData3D = {
-    'PLA':{'img':'/Resources-Img-Vid/Vectores/Ácido%20poliláctico%20—%20PLA.png','tag':'Biodegradable · Rígido','title':'PLA — Ácido Poliláctico','desc':'Material de entrada ideal para prototipos de forma, maquetas y piezas de baja carga. Fácil de imprimir, buena definición de detalles.','adv':['Fácil de imprimir','Biodegradable','Bajo costo','Buena definición de detalles'],'apps':['Prototipos de forma y ajuste','Maquetas de presentación','Modelos educativos','Piezas decorativas']},
-    'PETG':{'img':'/Resources-Img-Vid/Vectores/Tereftalato%20de%20polietileno%20—%20PETG.png','tag':'Semi-rígido · Resistente','title':'PETG — Tereftalato de Polietileno','desc':'Excelente balance entre rigidez y tenacidad. Resistente a la humedad, translúcido, ideal para contenedores y piezas funcionales.','adv':['Resistente a la humedad','Translúcido disponible','Buena adhesión entre capas','Apto uso alimentario'],'apps':['Contenedores y tapas','Protectores de piezas','Piezas de uso final','Uso alimentario grado']},
-    'ABS':{'img':'/Resources-Img-Vid/Vectores/Acrilonitrilo%20butadieno%20estireno%20—%20ABS.png','tag':'Rígido · Alta temperatura','title':'ABS — Acrilonitrilo Butadieno Estireno','desc':'Material técnico con alta resistencia al impacto y buenas propiedades mecánicas. Compatible con acabados superficiales.','adv':['Alta resistencia al impacto','Mecanizable y pintable','Acabado con acetona','Buena relación precio-desempeño'],'apps':['Carcasas técnicas','Piezas mecanizadas','Componentes automotrices','Prototipos funcionales']},
-    'TPU':{'img':'/Resources-Img-Vid/Vectores/Poliuretano%20termoplástico%20—%20TPU.png','tag':'Flexible · Elástico','title':'TPU — Poliuretano Termoplástico','desc':'Material flexible ideal para juntas, sellos, protectores de impacto y piezas que requieren elasticidad sin perder resistencia.','adv':['Alta flexibilidad','Resistente a la abrasión','Elasticidad duradera','Agarre ergonómico'],'apps':['Juntas y sellos','Mangos ergonómicos','Protectores de golpes','Ajuste a presión']},
-    'Nylon / PA':{'img':'/Resources-Img-Vid/Vectores/Nylon%20%20PA.png','tag':'Alta resistencia · Técnico','title':'Nylon / Poliamida (PA)','desc':'Excelente resistencia mecánica, tenacidad y resistencia química para piezas industriales de uso final.','adv':['Alta resistencia mecánica','Resistencia química','Bajo coeficiente de fricción','Duradero'],'apps':['Engranajes y poleas','Bujes y rodamientos','Piezas estructurales','Componentes de maquinaria']},
-    'Resinas técnicas':{'img':'/Resources-Img-Vid/Vectores/Resinas%20técnicas%20SLA.png','tag':'Alta precisión · SLA','title':'Resinas técnicas SLA','desc':'Alta resolución para piezas con detalle fino, superficies suaves y propiedades mecánicas específicas por formulación.','adv':['Altísima resolución','Superficies suaves','Amplia gama de propiedades','Detalle fino'],'apps':['Prototipos de alta fidelidad','Joyería y detalle fino','Odontología y medicina','Óptica y transparentes']},
-    'Alta temperatura':{'img':'/Resources-Img-Vid/Vectores/Alta%20temperatura.png','tag':'PEEK · PPS · PC','title':'Materiales de alta temperatura','desc':'Polímeros de alto rendimiento que mantienen propiedades mecánicas y dimensionales a temperaturas superiores a 150°C.','adv':['Estabilidad >150°C','Alta rigidez térmica','Resistencia química','Baja deformación'],'apps':['Componentes cerca de motores','Piezas automotrices','Conectores eléctricos','Utillajes de producción']},
-    'Flexibles':{'img':'/Resources-Img-Vid/Vectores/Flexibles.png','tag':'TPE · Silicona · Goma','title':'Materiales flexibles','desc':'Formulaciones blandas para absorción de impactos, sellado hermético o movimiento repetitivo.','adv':['Absorción de impactos','Sellado hermético','Movimiento repetitivo','Tacto suave'],'apps':['Sellos y empaquetaduras','Piezas amortiguadoras','Suelas y agarre','Protectores de equipos']}
+    'PLA':{'img':'/Resources-Img-Vid/home/acido-polilactico-pla.webp','tag':'Biodegradable · Rígido','title':'PLA — Ácido Poliláctico','desc':'Material de entrada ideal para prototipos de forma, maquetas y piezas de baja carga. Fácil de imprimir, buena definición de detalles.','adv':['Fácil de imprimir','Biodegradable','Bajo costo','Buena definición de detalles'],'apps':['Prototipos de forma y ajuste','Maquetas de presentación','Modelos educativos','Piezas decorativas']},
+    'PETG':{'img':'/Resources-Img-Vid/home/tereftalato-de-polietileno-petg.webp','tag':'Semi-rígido · Resistente','title':'PETG — Tereftalato de Polietileno','desc':'Excelente balance entre rigidez y tenacidad. Resistente a la humedad, translúcido, ideal para contenedores y piezas funcionales.','adv':['Resistente a la humedad','Translúcido disponible','Buena adhesión entre capas','Apto uso alimentario'],'apps':['Contenedores y tapas','Protectores de piezas','Piezas de uso final','Uso alimentario grado']},
+    'ABS':{'img':'/Resources-Img-Vid/home/acrilonitrilo-butadieno-estireno-abs.webp','tag':'Rígido · Alta temperatura','title':'ABS — Acrilonitrilo Butadieno Estireno','desc':'Material técnico con alta resistencia al impacto y buenas propiedades mecánicas. Compatible con acabados superficiales.','adv':['Alta resistencia al impacto','Mecanizable y pintable','Acabado con acetona','Buena relación precio-desempeño'],'apps':['Carcasas técnicas','Piezas mecanizadas','Componentes automotrices','Prototipos funcionales']},
+    'TPU':{'img':'/Resources-Img-Vid/home/poliuretano-termoplastico-tpu.webp','tag':'Flexible · Elástico','title':'TPU — Poliuretano Termoplástico','desc':'Material flexible ideal para juntas, sellos, protectores de impacto y piezas que requieren elasticidad sin perder resistencia.','adv':['Alta flexibilidad','Resistente a la abrasión','Elasticidad duradera','Agarre ergonómico'],'apps':['Juntas y sellos','Mangos ergonómicos','Protectores de golpes','Ajuste a presión']},
+    'Nylon / PA':{'img':'/Resources-Img-Vid/home/nylon-pa.webp','tag':'Alta resistencia · Técnico','title':'Nylon / Poliamida (PA)','desc':'Excelente resistencia mecánica, tenacidad y resistencia química para piezas industriales de uso final.','adv':['Alta resistencia mecánica','Resistencia química','Bajo coeficiente de fricción','Duradero'],'apps':['Engranajes y poleas','Bujes y rodamientos','Piezas estructurales','Componentes de maquinaria']},
+    'Resinas técnicas':{'img':'/Resources-Img-Vid/home/resinas-tecnicas-sla.webp','tag':'Alta precisión · SLA','title':'Resinas técnicas SLA','desc':'Alta resolución para piezas con detalle fino, superficies suaves y propiedades mecánicas específicas por formulación.','adv':['Altísima resolución','Superficies suaves','Amplia gama de propiedades','Detalle fino'],'apps':['Prototipos de alta fidelidad','Joyería y detalle fino','Odontología y medicina','Óptica y transparentes']},
+    'Alta temperatura':{'img':'/Resources-Img-Vid/home/alta-temperatura.webp','tag':'PEEK · PPS · PC','title':'Materiales de alta temperatura','desc':'Polímeros de alto rendimiento que mantienen propiedades mecánicas y dimensionales a temperaturas superiores a 150°C.','adv':['Estabilidad >150°C','Alta rigidez térmica','Resistencia química','Baja deformación'],'apps':['Componentes cerca de motores','Piezas automotrices','Conectores eléctricos','Utillajes de producción']},
+    'Flexibles':{'img':'/Resources-Img-Vid/home/flexibles.webp','tag':'TPE · Silicona · Goma','title':'Materiales flexibles','desc':'Formulaciones blandas para absorción de impactos, sellado hermético o movimiento repetitivo.','adv':['Absorción de impactos','Sellado hermético','Movimiento repetitivo','Tacto suave'],'apps':['Sellos y empaquetaduras','Piezas amortiguadoras','Suelas y agarre','Protectores de equipos']}
   };
 
   var matDataIny = {
-    'ABS':{'img':'/Resources-Img-Vid/Vectores/ABS%20inyectado.png','tag':'Rígido · Técnico','title':'ABS Inyectado','desc':'Excelente resistencia al impacto, dureza superficial y fácil acabado para piezas de uso final en producción.','adv':['Alta resistencia al impacto','Fácil coloración','Estabilidad dimensional','Mecanizable'],'apps':['Carcasas electrónicas','Automotriz interior','Juguetes y accesorios','Componentes industriales']},
-    'PP':{'img':'/Resources-Img-Vid/Vectores/Polipropileno.png','tag':'Polipropileno · Versátil','title':'PP — Polipropileno','desc':'Material versátil con excelente resistencia química, bajo peso y buena flexibilidad. Estándar en envases industriales.','adv':['Resistencia química','Bajo peso','Flexible','Económico y escalable'],'apps':['Envases y tapas','Componentes de tubería','Piezas de bajo costo','Bisagras integrales']},
-    'PE':{'img':'/Resources-Img-Vid/Vectores/Polietileno.png','tag':'Polietileno · Ligero','title':'PE — Polietileno','desc':'Uno de los plásticos más utilizados. Excelente resistencia química, bajo costo y alta versatilidad.','adv':['Resistencia química','Bajo costo','Flexible y ligero','Apto alimentario'],'apps':['Envases alimentarios','Tuberías y conexiones','Tanques y contenedores','Piezas de baja carga']},
-    'Nylon':{'img':'/Resources-Img-Vid/Vectores/nylon.png','tag':'PA · Alta resistencia','title':'Nylon / Poliamida Inyectado','desc':'Alta resistencia mecánica, bajo coeficiente de fricción y excelente durabilidad para piezas industriales.','adv':['Alta resistencia','Bajo rozamiento','Resistencia a fatiga','Compatible con refuerzos'],'apps':['Engranajes y poleas','Bujes autolubricados','Piezas estructurales','Maquinaria']},
-    'PC':{'img':'/Resources-Img-Vid/Vectores/policarbonato.png','tag':'Policarbonato · Óptico','title':'PC — Policarbonato','desc':'Material transparente de alta resistencia al impacto. Ideal para óptica, estructuras y aplicaciones de seguridad.','adv':['Transparente y óptico','Alta resistencia al impacto','Estabilidad dimensional','Ignífugo disponible'],'apps':['Lentes y ventanas','Carcasas de equipos','Piezas de seguridad','Electrónica']},
-    'POM':{'img':'/Resources-Img-Vid/Vectores/Polioximetileno.png','tag':'Acetal · Precisión','title':'POM — Polioximetileno','desc':'Alta precisión dimensional, baja fricción y alta durabilidad. Ideal para piezas de movimiento y mecanismos.','adv':['Alta precisión','Bajo coeficiente de fricción','Resistencia química','Autolubricante'],'apps':['Engranajes de precisión','Rodillos y guías','Mecanismos','Conectores de precisión']},
-    'TPU':{'img':'/Resources-Img-Vid/Vectores/tpuinyectado.png','tag':'Flexible · Inyectado','title':'TPU Inyectado','desc':'Mayor consistencia en geometrías complejas y mejores propiedades de superficie que el TPU impreso.','adv':['Flexibilidad controlada','Resistencia a abrasión','Geometrías complejas','Alta calidad de superficie'],'apps':['Suelas técnicas','Mangueras flexibles','Protectores','Empaquetaduras de precisión']},
-    'Materiales técnicos':{'img':'/Resources-Img-Vid/Vectores/Materiales%20tecnicos.png','tag':'PC · POM · PSU · PEEK','title':'Materiales técnicos avanzados','desc':'Plásticos de ingeniería avanzada para aplicaciones con requisitos térmicos, mecánicos o químicos extremos.','adv':['Rendimiento extremo','Resistencia a alta temperatura','Resistencia química','Certificaciones disponibles'],'apps':['Aeroespacial','Médico','Electrónica avanzada','Aplicaciones de alta exigencia']}
+    'ABS':{'img':'/Resources-Img-Vid/home/abs-inyectado.webp','tag':'Rígido · Técnico','title':'ABS Inyectado','desc':'Excelente resistencia al impacto, dureza superficial y fácil acabado para piezas de uso final en producción.','adv':['Alta resistencia al impacto','Fácil coloración','Estabilidad dimensional','Mecanizable'],'apps':['Carcasas electrónicas','Automotriz interior','Juguetes y accesorios','Componentes industriales']},
+    'PP':{'img':'/Resources-Img-Vid/home/polipropileno.webp','tag':'Polipropileno · Versátil','title':'PP — Polipropileno','desc':'Material versátil con excelente resistencia química, bajo peso y buena flexibilidad. Estándar en envases industriales.','adv':['Resistencia química','Bajo peso','Flexible','Económico y escalable'],'apps':['Envases y tapas','Componentes de tubería','Piezas de bajo costo','Bisagras integrales']},
+    'PE':{'img':'/Resources-Img-Vid/home/polietileno.webp','tag':'Polietileno · Ligero','title':'PE — Polietileno','desc':'Uno de los plásticos más utilizados. Excelente resistencia química, bajo costo y alta versatilidad.','adv':['Resistencia química','Bajo costo','Flexible y ligero','Apto alimentario'],'apps':['Envases alimentarios','Tuberías y conexiones','Tanques y contenedores','Piezas de baja carga']},
+    'Nylon':{'img':'/Resources-Img-Vid/home/nylon.webp','tag':'PA · Alta resistencia','title':'Nylon / Poliamida Inyectado','desc':'Alta resistencia mecánica, bajo coeficiente de fricción y excelente durabilidad para piezas industriales.','adv':['Alta resistencia','Bajo rozamiento','Resistencia a fatiga','Compatible con refuerzos'],'apps':['Engranajes y poleas','Bujes autolubricados','Piezas estructurales','Maquinaria']},
+    'PC':{'img':'/Resources-Img-Vid/home/policarbonato.webp','tag':'Policarbonato · Óptico','title':'PC — Policarbonato','desc':'Material transparente de alta resistencia al impacto. Ideal para óptica, estructuras y aplicaciones de seguridad.','adv':['Transparente y óptico','Alta resistencia al impacto','Estabilidad dimensional','Ignífugo disponible'],'apps':['Lentes y ventanas','Carcasas de equipos','Piezas de seguridad','Electrónica']},
+    'POM':{'img':'/Resources-Img-Vid/home/polioximetileno.webp','tag':'Acetal · Precisión','title':'POM — Polioximetileno','desc':'Alta precisión dimensional, baja fricción y alta durabilidad. Ideal para piezas de movimiento y mecanismos.','adv':['Alta precisión','Bajo coeficiente de fricción','Resistencia química','Autolubricante'],'apps':['Engranajes de precisión','Rodillos y guías','Mecanismos','Conectores de precisión']},
+    'TPU':{'img':'/Resources-Img-Vid/home/tpuinyectado.webp','tag':'Flexible · Inyectado','title':'TPU Inyectado','desc':'Mayor consistencia en geometrías complejas y mejores propiedades de superficie que el TPU impreso.','adv':['Flexibilidad controlada','Resistencia a abrasión','Geometrías complejas','Alta calidad de superficie'],'apps':['Suelas técnicas','Mangueras flexibles','Protectores','Empaquetaduras de precisión']},
+    'Materiales técnicos':{'img':'/Resources-Img-Vid/home/materiales-tecnicos.webp','tag':'PC · POM · PSU · PEEK','title':'Materiales técnicos avanzados','desc':'Plásticos de ingeniería avanzada para aplicaciones con requisitos térmicos, mecánicos o químicos extremos.','adv':['Rendimiento extremo','Resistencia a alta temperatura','Resistencia química','Certificaciones disponibles'],'apps':['Aeroespacial','Médico','Electrónica avanzada','Aplicaciones de alta exigencia']}
   };
   function injectMateriales() {
     if (document.getElementById('df-materiales')) return;
@@ -612,10 +590,10 @@
     var anchor = document.getElementById('df-materiales');
 
     var LOGOS = [
-      { name: 'Distribuidora Nord', src: '/Resources-Img-Vid/Vectores/DNORDLOGO.png', href: 'https://www.instagram.com/distribuidoranord/', dark: true },
-      { name: 'NORD azul', src: '/Resources-Img-Vid/Vectores/NORDLOGO.png', href: 'https://www.facebook.com/persianasnord' },
-      { name: 'Global Shade Supplier', src: '/Resources-Img-Vid/Vectores/GLOBALLOGO.png', href: 'https://www.instagram.com/globalshadessupplier/' },
-      { name: 'JMJ Toldos y Persianas', src: '/Resources-Img-Vid/Vectores/JMJLOGO.png', href: 'https://www.toldosjmj.com/' }
+      { name: 'Distribuidora Nord', src: '/Resources-Img-Vid/home/dnordlogo.webp', href: 'https://www.instagram.com/distribuidoranord/', dark: true },
+      { name: 'NORD azul', src: '/Resources-Img-Vid/home/nordlogo.webp', href: 'https://www.facebook.com/persianasnord' },
+      { name: 'Global Shade Supplier', src: '/Resources-Img-Vid/home/globallogo.webp', href: 'https://www.instagram.com/globalshadessupplier/' },
+      { name: 'JMJ Toldos y Persianas', src: '/Resources-Img-Vid/home/jmjlogo.webp', href: 'https://www.toldosjmj.com/' }
     ];
 
     // Double for continuous infinite-loop scrolling with the four real logos.
@@ -659,7 +637,7 @@
 
       function scrollLogos(timestamp) {
         if (lastTime === null) lastTime = timestamp;
-        var delta = timestamp - lastTime;
+        var delta = Math.min(timestamp - lastTime, 32);
         lastTime = timestamp;
 
         if (!isPaused) {
@@ -668,9 +646,8 @@
             track.scrollLeft -= track.scrollWidth / 2;
           }
         }
-        requestAnimationFrame(scrollLogos);
       }
-      requestAnimationFrame(scrollLogos);
+      animateVisible(track, scrollLogos);
     }, 700);
   }
 
@@ -686,11 +663,7 @@
     var sec = document.createElement('div');
     sec.id = 'df-cta-contact';
     sec.innerHTML =
-      // Decorative background elements
-      '<div class="df-cta-grid" aria-hidden="true"></div>'
-      +'<div class="df-cta-orb" aria-hidden="true"></div>'
-      // Two-column layout
-      +'<div class="df-cta-inner">'
+      '<div class="df-cta-inner">'
         +'<div class="df-cta-text">'
           +'<span class="df-cta-eyebrow">Cotizaci\u00f3n sin costo</span>'
           +'<h2>\u00bfTienes una pieza o proyecto en mente?</h2>'
@@ -741,7 +714,7 @@
         // ── Brand column ──────────────────────────────────────────────────────
         +'<div class="df-ft-brand">'
           +'<a class="df-ft-logo" href="'+ftPfx+'" title="Dualform \u2014 Inicio">'
-            +'<img src="'+ftPfx+'Resources-Img-Vid/Dualform_logo_background_removed.png" alt="Dualform" class="df-ft-logo-img">'
+            +'<img src="'+ftPfx+'Resources-Img-Vid/home/dualform-logo-background-removed.webp" alt="Dualform" class="df-ft-logo-img">'
           +'</a>'
           +'<div class="df-ft-brand-bar"></div>'
           +'<p class="df-ft-tagline">Manufactura avanzada en impresi\u00f3n 3D e inyecci\u00f3n pl\u00e1stica para industria y dise\u00f1o.</p>'
@@ -877,7 +850,6 @@
   function run() {
     fixDropdowns();
     injectHeroTitle();
-    injectHeroBackground();
     translateHeroButtons();
     markHeroReady();
     deactivateIndustryCards();
@@ -903,7 +875,6 @@
     setTimeout(function() {
       sweepLegacy();
       injectHeroTitle();
-      injectHeroBackground();
       translateHeroButtons();
       markHeroReady();
       injectSectorsSection();

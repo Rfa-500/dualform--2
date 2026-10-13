@@ -183,12 +183,6 @@ html, body, * {
   z-index: 0 !important;
 }
 
-.Box_box__aYil_.Box_dark__S8Dzc .box_background video {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-}
-
 .Box_box__aYil_.Box_dark__S8Dzc .box_background .df-hero-bg-img {
   position: absolute;
   inset: 0;
@@ -196,17 +190,6 @@ html, body, * {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0;
-  transition: opacity 0.28s ease;
-}
-
-.Box_box__aYil_.Box_dark__S8Dzc .box_background.df-hero-bg-ready .df-hero-bg-img {
-  opacity: 1;
-}
-
-.Box_box__aYil_.Box_dark__S8Dzc .box_background.df-hero-bg-ready video,
-.Box_box__aYil_.Box_dark__S8Dzc .box_background.df-hero-bg-ready > img:not(.df-hero-bg-img) {
-  opacity: 0;
 }
 
 .Box_box__aYil_.Box_dark__S8Dzc .box_background::after {
