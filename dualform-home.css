@@ -276,17 +276,86 @@
 .df-home #df-nuestras-tech .df-logo-card:hover { transform: translateY(-4px); border-color: #b8c3ce; box-shadow: 0 6px 18px rgba(24,42,62,.05); }
 .df-home #df-nuestras-tech .df-logo-img { transition: transform .55s cubic-bezier(.2,.7,.25,1); }
 .df-home #df-nuestras-tech .df-logo-card:hover .df-logo-img { transform: scale(1.035); }
-.df-home #df-cta-contact { margin: 0 32px 60px; padding: 64px 48px; border: 1px solid var(--home-line); border-radius: 22px; background: #eff3f5; }
-.df-home #df-cta-contact h2 { color: var(--home-ink); }
-.df-home #df-cta-contact .df-cta-text p { color: var(--home-muted); }
-.df-home #df-cta-contact .df-cta-eyebrow { background: transparent; padding-left: 0; }
-.df-home #df-cta-contact .df-cta-chips span { color: #526172; border-color: #cbd4dc; background: transparent; border-radius: 6px; }
-.df-home #df-cta-contact .df-cta-stat { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
-.df-home #df-cta-contact .df-cta-stat-num { color: var(--home-ink); }
-.df-home #df-cta-contact .df-cta-stat-lbl,
-.df-home #df-cta-contact .df-cta-note { color: var(--home-muted); }
-.df-home #df-cta-contact .df-cta-btn { box-shadow: none; border-radius: 10px; background: var(--home-action); }
+/* Home quotation card: keep the existing content and contact link. */
+.df-home #df-cta-contact {
+  width: calc(100% - 64px);
+  max-width: 1296px;
+  margin: 0 auto 60px;
+  padding: 48px;
+  border: 1px solid #303b49;
+  border-radius: 24px;
+  background: #19222e;
+  box-shadow: 0 12px 30px rgba(15,23,34,.08);
+}
+.df-home #df-cta-contact .df-cta-inner {
+  max-width: none;
+  grid-template-columns: minmax(0,1.35fr) minmax(0,1fr);
+  gap: clamp(32px,5vw,72px);
+}
+.df-home #df-cta-contact .df-cta-eyebrow {
+  padding: 0;
+  margin-bottom: 18px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #ff985f;
+  font-size: 11px;
+  letter-spacing: .14em;
+}
+.df-home #df-cta-contact h2 { color: #fff; font-size: clamp(28px,2.8vw,40px); line-height: 1.18; letter-spacing: -.035em; margin-bottom: 18px; text-wrap: balance; }
+.df-home #df-cta-contact .df-cta-text p { max-width: 550px; margin-bottom: 24px; color: #c3ccd7; font-size: 15px; line-height: 1.7; }
+.df-home #df-cta-contact .df-cta-chips { gap: 8px; }
+.df-home #df-cta-contact .df-cta-chips span {
+  padding: 6px 10px;
+  color: #d2d9e2;
+  border-color: #435062;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  transition: color .22s ease, border-color .22s ease;
+}
+.df-home #df-cta-contact .df-cta-chips span:hover { color: #ffad80; border-color: #bb744e; }
+.df-home #df-cta-contact .df-cta-action { min-width: 0; gap: 24px; padding-left: 40px; border-left: 1px solid #374250; }
+.df-home #df-cta-contact .df-cta-stats { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.df-home #df-cta-contact .df-cta-stat { padding: 0; gap: 8px; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.df-home #df-cta-contact .df-cta-stat + .df-cta-stat { padding-left: 20px; border-left: 1px solid #374250; }
+.df-home #df-cta-contact .df-cta-stat-num { color: #fff; font-size: 28px; font-weight: 650; line-height: 1.1; }
+.df-home #df-cta-contact .df-cta-stat-lbl { color: #c3ccd7; font-size: 12px; line-height: 1.5; }
+.df-home #df-cta-contact .df-cta-btn {
+  width: 100%;
+  min-height: 54px;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: #c94716;
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 0;
+  box-shadow: none;
+  transition: background-color .22s ease;
+}
 .df-home #df-cta-contact .df-cta-btn::before { content: none; }
+.df-home #df-cta-contact .df-cta-btn:hover { background: #b63c0e; transform: none; box-shadow: none; }
+.df-home #df-cta-contact .df-cta-btn:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.df-home #df-cta-contact .df-cta-btn svg { transition: transform .22s ease; }
+.df-home #df-cta-contact .df-cta-btn:hover svg { transform: translateX(3px); }
+.df-home #df-cta-contact .df-cta-note { max-width: none; margin: -12px 0 0; color: #b4bfcd; font-size: 11px; line-height: 1.6; letter-spacing: 0; }
+
+@media (max-width: 1000px) {
+  .df-home #df-cta-contact { padding: 36px 32px; }
+  .df-home #df-cta-contact .df-cta-inner { gap: 32px; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); }
+  .df-home #df-cta-contact .df-cta-action { padding-left: 24px; }
+}
+@media (max-width: 767px) {
+  .df-home #df-cta-contact { width: calc(100% - 32px); margin-bottom: 40px; padding: 32px 24px; }
+  .df-home #df-cta-contact .df-cta-inner { grid-template-columns: minmax(0,1fr); gap: 0; }
+  .df-home #df-cta-contact .df-cta-text { display: contents; }
+  .df-home #df-cta-contact .df-cta-action { order: 1; padding: 24px 0 0; border-left: 0; border-top: 1px solid #374250; }
+  .df-home #df-cta-contact .df-cta-chips { order: 2; margin-top: 24px; }
+}
 .df-home .df-reveal { animation: df-home-reveal .5s cubic-bezier(.2,.65,.3,1) both; }
 @keyframes df-home-reveal { from { opacity: .6; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
@@ -334,8 +403,6 @@
   .df-home #df-servicios-section .df-serv-card { flex-basis: 285px; }
   .df-home :is(#df-tecnologias-fab,#df-materiales,#df-nuestras-tech) { padding-left: 24px; padding-right: 24px; }
   .df-home #df-tecnologias-fab .df-tf-body { padding: 24px; }
-  .df-home #df-cta-contact { margin: 0 16px 40px; padding: 40px 24px; border-radius: 16px; }
-  .df-home #df-cta-contact .df-cta-inner { gap: 32px; }
 }
 @media (max-width: 360px) {
   .df-home #df-home-hero { padding-left: 20px !important; padding-right: 20px !important; }
@@ -344,4 +411,5 @@
 @media (prefers-reduced-motion: reduce) {
   .df-home *, .df-home *::before, .df-home *::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
   .df-home .df-machine-rig, .df-home .df-machine-shadow { transform: none !important; }
+  .df-home #df-cta-contact .df-cta-btn:hover svg { transform: none; }
 }
