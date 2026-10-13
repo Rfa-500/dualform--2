@@ -1,72 +1,5 @@
-/* Home-only visual system. Shared pages retain their existing styles. */
-@font-face {
-  font-family: 'Manrope';
-  src: url('/Resources-Img-Vid/home/manrope-latin-variable.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 200 800;
-  font-display: swap;
-}
-body.df-home {
-  --df-font-global: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --df-font: var(--df-font-global);
-  --home-ink: #142130;
-  --home-muted: #586676;
-  --home-line: #dce2e7;
-  --home-paper: #f5f7f8;
-  --home-orange: #e8521a;
-  --home-action: #cc4514;
-  color: var(--home-ink);
-  background: #fff;
-  font-family: var(--df-font-global);
-}
-body.df-home.df-header-active { padding-top: 0 !important; }
-.df-home :is(a, button, [tabindex]):focus-visible {
-  outline: 2px solid #c64416;
-  outline-offset: 5px;
-}
-.df-home [id] { scroll-margin-top: 112px; }
-.df-home #df-header {
-  top: 20px;
-  left: max(24px, calc((100vw - 1456px) / 2));
-  right: max(24px, calc((100vw - 1456px) / 2));
-  height: 76px;
-  border: 1px solid rgba(209,218,226,.75);
-  border-radius: 20px;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 6px 24px rgba(33,48,63,.045);
-}
-.df-home #df-header .df-inner { max-width: none; padding: 0 24px; gap: 20px; }
-.df-home #df-header .df-logo { padding: 0; }
-.df-home #df-header .df-logo-img { height: 52px; }
-.df-home #df-header .df-logo-brand-text { font-size: 26px; color: #111c2b; margin-left: 8px; letter-spacing: -1.2px; }
-.df-home #df-header .df-nav-link { font-size: 12px; padding: 10px 10px; gap: 7px; letter-spacing: 0; }
-.df-home #df-header .df-cta-btn {
-  min-height: 46px;
-  padding: 12px 22px;
-  border-radius: 11px;
-  box-shadow: none;
-  background: var(--home-action);
-  font-size: 13px;
-  letter-spacing: 0;
-}
-.df-home #df-header .df-cta-btn:hover { background: #c74412; box-shadow: 0 4px 12px rgba(45,49,53,.09); }
-.df-home #df-header .df-cta-btn::before { content: none; }
-.df-home #df-header .df-cta-btn svg { display: block; order: 2; width: 17px; height: 17px; margin-left: 8px; }
-.df-home #df-header .df-cta-btn::after { content: none; }
-.df-home #df-header .df-dropdown { box-shadow: 0 12px 24px rgba(24,42,62,.1) !important; border: 1px solid var(--home-line) !important; }
-.df-home #df-mobile-drawer {
-  top: 106px; left: 24px; right: 24px; bottom: auto;
-  max-height: calc(100dvh - 128px);
-  border: 1px solid var(--home-line);
-  border-radius: 18px;
-  box-shadow: 0 16px 48px rgba(24,42,62,.13);
-}
-.df-home #df-mobile-drawer .df-mob-cta a { box-shadow: none; background: var(--home-action); }
-
 /* Same hero structure and text; an independently moving machine layer. */
-.df-home #wrapper-4a907144-02ce-4afd-81eb-d25588b54ec5 { background: #edf1f3; }
+.df-home #wrapper-4a907144-02ce-4afd-81eb-d25588b54ec5 { background: #fff; }
 .df-home #wrapper-4a907144-02ce-4afd-81eb-d25588b54ec5 :is(.TwelveColumnLayout_wrapper__OBqeh,.TwelveColumnLayout_content__2DAlM,.TwelveColumnLayoutInner_twelve-column-layout-inner__SZ9jd) {
   min-height: 0 !important;
   padding: 0 !important;
@@ -78,20 +11,20 @@ body.df-home.df-header-active { padding-top: 0 !important; }
 .df-home #df-home-hero {
   position: relative;
   isolation: isolate;
-  min-height: 790px !important;
+  min-height: 900px !important;
   height: auto;
   width: 100%;
   overflow: hidden;
   border-radius: 0;
   border: 0;
   gap: 0 !important;
-  padding: 204px max(56px, calc((100vw - 1392px) / 2)) 190px !important;
+  padding: 204px max(56px, calc((100vw - 1392px) / 2)) 275px !important;
   align-items: flex-start !important;
   justify-content: flex-start !important;
   background: #f1f4f5;
 }
 .df-home #df-home-hero .box_background { overflow: hidden; }
-.df-home #df-home-hero .df-hero-bg-img { object-position: 58% 60%; opacity: .88; }
+.df-home #df-home-hero .df-hero-bg-img { object-position: 58% 100%; opacity: 1; }
 .df-home #df-home-hero .box_background::after {
   background: linear-gradient(90deg, rgba(255,255,255,.97) 0%, rgba(255,255,255,.86) 26%, rgba(255,255,255,.44) 50%, rgba(247,250,252,.12) 76%), linear-gradient(0deg, rgba(234,239,242,.82), transparent 30%);
 }
@@ -155,54 +88,69 @@ body.df-home.df-header-active { padding-top: 0 !important; }
   align-items: center;
   justify-content: center;
   gap: 18px;
-  min-height: 52px;
-  padding: 15px 23px;
+  min-height: 56px;
+  padding: 16px 27px;
   margin: 0;
   border: 1px solid transparent;
   border-radius: 11px;
   color: #fff;
-  background: var(--home-action);
+  background: linear-gradient(135deg,#df4912,#c73808);
   font-family: var(--df-font-global);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 750;
   text-transform: none;
   letter-spacing: -.015em;
   text-decoration: none;
-  box-shadow: none;
-  transition: background .18s, transform .18s, border-color .18s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25),0 5px 18px rgba(214,68,12,.2);
+  transition: background .3s,transform .3s cubic-bezier(.2,.7,.25,1),border-color .3s,box-shadow .3s;
 }
 .df-home #df-home-hero a.df-hero-cta * { font-family: inherit; }
 .df-home #df-home-hero a.df-hero-cta svg { width: 17px; height: 17px; flex-shrink: 0; }
-.df-home #df-home-hero a.df-hero-cta:hover { background: #ca4213; transform: translateY(-2px); }
-.df-home #df-home-hero a.df-hero-cta-secondary { color: var(--home-ink); background: rgba(255,255,255,.72); border-color: #bfcad4; }
-.df-home #df-home-hero a.df-hero-cta-secondary:hover { background: #fff; border-color: #8292a3; }
+.df-home #df-home-hero a.df-hero-cta:hover { background: linear-gradient(135deg,#ee541a,#d4400b); transform: translateY(-3px); box-shadow: 0 9px 25px rgba(214,68,12,.25); }
+.df-home #df-home-hero a.df-hero-cta-secondary { color: var(--home-ink); background: rgba(255,255,255,.92); border-color: #8996a2; box-shadow: 0 4px 14px rgba(20,33,48,.07); }
+.df-home #df-home-hero a.df-hero-cta-secondary:hover { background: #fff; border-color: #384958; box-shadow: 0 7px 20px rgba(20,33,48,.12); }
 .df-home .df-machine-stage {
   position: absolute;
-  width: min(64vw, 1100px);
-  right: max(-40px, calc((100vw - 1620px) / 2));
+  width: min(62vw, 1100px);
+  right: max(12px, calc((100vw - 1620px) / 2));
   top: 198px;
   z-index: 2;
-  perspective: 1400px;
+  perspective: 1600px;
   padding: 0 !important;
   order: 2;
 }
-.df-home .df-machine-object {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1672 / 941;
-  transform: translate3d(var(--machine-x,0px),var(--machine-y,0px),0) rotateY(var(--machine-ry,0deg));
-  transition: transform .55s cubic-bezier(.2,.65,.3,1);
+.df-home .df-machine-object { position: relative; width: 100%; aspect-ratio: 1672 / 941; }
+.df-home .df-machine-shadow {
+  position: absolute; width: 82%; height: 7%; left: 9%; bottom: 9%;
+  border-radius: 50%; background: rgba(20,27,34,.32); filter: blur(14px);
+  transform: translateX(var(--shadow-x,0px)) scaleX(var(--shadow-scale,1));
+  transition: transform .65s cubic-bezier(.2,.7,.25,1),opacity .65s;
 }
-.df-home .df-machine-object::before {
-  content: '';
-  position: absolute;
-  width: 81%; height: 7%; left: 10%; bottom: 9%;
-  border-radius: 50%;
-  background: rgba(31,45,56,.24);
-  filter: blur(14px);
-  transform: rotate(-1deg);
+.df-home .df-machine-rig {
+  position: relative; width: 100%; transform-style: preserve-3d;
+  transform: perspective(1600px) rotateX(var(--machine-rx,0deg)) rotateY(var(--machine-ry,0deg));
+  transform-origin: 50% 70%; transition: transform .65s cubic-bezier(.2,.7,.25,1);
 }
 .df-home .df-machine-image { display: block; width: 100%; height: auto; position: relative; }
+.df-home .df-machine-part { position: absolute; pointer-events: none; }
+.df-home .df-machine-open-clamp { inset: 0; width: 100%; height: 100%; clip-path: inset(27.63% 52.63% 42% 28.35%); }
+.df-home .df-machine-clamp { left: 28.35%; top: 27.63%; width: 19.02%; height: 30.37%; overflow: hidden; transform: translateZ(5px); }
+.df-home .df-machine-door { width: 100%; height: 100%; transition: transform .95s cubic-bezier(.22,.68,.18,1); }
+.df-home .df-machine-door svg { display: block; width: 100%; height: 100%; }
+.df-home .df-machine-object[data-active-part=clamp] .df-machine-door { transform: translateX(-98%); }
+.df-home .df-machine-panel-bed { left: 47.55%; top: 27.4%; width: 5.6%; height: 19.15%; background: #252a2d; border: 1px solid #3c4449; }
+.df-home .df-machine-panel { left: 47.55%; top: 27.4%; width: 5.6%; height: 19.15%; transform-origin: right center; transform: translateZ(8px); transition: transform .7s cubic-bezier(.2,.7,.25,1),filter .7s; }
+.df-home .df-machine-panel svg, .df-home .df-machine-injection-rod svg { width: 100%; height: 100%; display: block; }
+.df-home .df-machine-panel-screen { position: absolute; left: 14%; top: 10%; width: 74%; height: 32%; background: #82c9e3; opacity: 0; mix-blend-mode: screen; box-shadow: 0 0 9px rgba(115,209,243,.45); transition: opacity .6s; }
+.df-home .df-machine-object[data-active-part=control] .df-machine-panel { transform: translateZ(18px) rotateY(-18deg) rotateX(3deg); filter: drop-shadow(5px 3px 3px rgba(0,0,0,.25)); }
+.df-home .df-machine-object[data-active-part=control] .df-machine-panel-screen { opacity: .7; }
+.df-home .df-machine-injection { left: 59.8%; top: 39%; width: 7.6%; height: 5.1%; overflow: hidden; background: linear-gradient(#545b61,#a5aeb4 28%,#525c64 40%,#20262c 75%); transform: translateZ(4px); }
+.df-home .df-machine-injection-rod { width: 100%; height: 100%; transition: transform .8s cubic-bezier(.25,.65,.2,1); }
+.df-home .df-machine-object[data-active-part=injection] .df-machine-injection-rod { transform: translateX(-16%); }
+.df-home .df-machine-light { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(var(--machine-light-angle,100deg),rgba(255,255,255,.13),transparent 47%,rgba(0,0,0,.09)); mask: url('/Resources-Img-Vid/home/machine-1672.webp') center / 100% 100% no-repeat; opacity: 0; transition: opacity .6s; transform: translateZ(1px); }
+.df-home .df-machine-stage:hover .df-machine-light { opacity: 1; }
+.df-home .df-machine-rig > :not(.df-machine-image) { visibility: hidden; }
+.df-home .df-parts-ready .df-machine-rig > :not(.df-machine-image) { visibility: visible; }
 .df-home .df-machine-point {
   position: absolute;
   width: 44px; height: 44px;
@@ -232,20 +180,7 @@ body.df-home.df-header-active { padding-top: 0 !important; }
 .df-home .df-machine-point[aria-expanded=true] span { transform: scale(1.13); background: #b8380c; }
 .df-home .df-machine-point--clamp { left: 41%; top: 46%; }
 .df-home .df-machine-point--control { left: 50.5%; top: 31%; }
-.df-home .df-machine-point--injection { left: 76%; top: 42%; }
-.df-home .df-machine-highlight {
-  position: absolute;
-  left: 29%; top: 28%; width: 17.5%; height: 28.5%;
-  border: 1px solid rgba(232,82,26,.7);
-  background: rgba(232,82,26,.07);
-  opacity: 0;
-  transition: opacity .2s;
-  pointer-events: none;
-  border-radius: 3px;
-}
-.df-home .df-machine-object[data-active-part=clamp] .df-machine-highlight { opacity: 1; }
-.df-home .df-machine-object[data-active-part=control] .df-machine-highlight { opacity: 1; left: 48%; top: 28%; width: 5%; height: 23%; }
-.df-home .df-machine-object[data-active-part=injection] .df-machine-highlight { opacity: 1; left: 72%; top: 30%; width: 16%; height: 16%; }
+.df-home .df-machine-point--injection { left: 64%; top: 41%; }
 .df-home .df-machine-detail {
   position: absolute;
   top: 13%; right: 8%;
@@ -266,7 +201,7 @@ body.df-home.df-header-active { padding-top: 0 !important; }
 .df-home #df-sectors-section {
   position: relative;
   z-index: 4;
-  margin: -78px auto 0;
+  margin: -170px auto 52px;
   width: calc(100% - 80px);
   max-width: 1400px;
   padding: 0;
@@ -291,7 +226,7 @@ body.df-home.df-header-active { padding-top: 0 !important; }
 .df-home :is(.df-serv-header,.df-tf-header,.df-mat-header,.df-clientes-header) { text-align: left; margin-bottom: 40px; }
 .df-home :is(.df-serv-header,.df-tf-inner,.df-mat-inner,.df-clientes-inner,.df-cta-inner,.df-ft-inner) { max-width: 1296px; margin-left: auto; margin-right: auto; }
 .df-home :is(#df-servicios-section,#df-tecnologias-fab,#df-materiales,#df-nuestras-tech,#df-cta-contact) h2 { font-size: clamp(30px,3vw,44px); font-weight: 700; line-height: 1.2; letter-spacing: -.045em; }
-.df-home :is(#df-servicios-section,#df-tecnologias-fab,#df-materiales,#df-nuestras-tech) h2 span { color: inherit; }
+.df-home :is(#df-servicios-section,#df-tecnologias-fab,#df-materiales,#df-nuestras-tech) h2 span { color: #e8521a; }
 .df-home #df-servicios-section { background: #fff; padding-top: 96px; }
 .df-home #df-servicios-section .df-serv-header { padding: 0 40px; text-align: left; }
 .df-home #df-servicios-section .df-serv-header h2 { color: var(--home-ink); }
@@ -311,23 +246,23 @@ body.df-home.df-header-active { padding-top: 0 !important; }
 .df-home #df-servicios-section .df-serv-num { color: #fff; background: rgba(20,33,48,.7); border-radius: 5px; padding: 3px 6px; }
 .df-home #df-servicios-section .df-serv-dot { background: #cbd4dc; width: 6px; height: 6px; }
 .df-home #df-servicios-section .df-serv-dot.active { background: var(--home-orange); transform: none; }
-.df-home #df-tecnologias-fab { background: #15222f; padding-left: 40px; padding-right: 40px; }
-.df-home #df-tecnologias-fab .df-tf-card { background: #1d2c3a; border: 1px solid #344350; border-radius: 16px; }
+.df-home #df-tecnologias-fab { background: #0d0d0d; padding-left: 40px; padding-right: 40px; }
+.df-home #df-tecnologias-fab .df-tf-card { background: #1a1a1a; border: 1px solid #343434; border-radius: 16px; }
 .df-home #df-tecnologias-fab .df-tf-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,.1); }
-.df-home #df-tecnologias-fab .df-tf-card .df-tf-img { background: #eaf0f3; }
-.df-home #df-tecnologias-fab .df-tf-img img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.df-home #df-tecnologias-fab .df-tf-card .df-tf-img { background: #111827; }
+.df-home #df-tecnologias-fab .df-tf-img img { width: 100%; height: 100%; display: block; object-fit: cover; }
 .df-home #df-servicios-section .df-serv-card:first-child .df-serv-card-img,
 .df-home #df-tecnologias-fab .df-tf-card:first-child .df-tf-img { background: #292929; }
-.df-home #df-tecnologias-fab .df-tf-header,
+.df-home #df-tecnologias-fab .df-tf-header { text-align: center; }
 .df-home #df-materiales .df-mat-header { text-align: left; }
-.df-home #df-tecnologias-fab .df-tf-header p,
+.df-home #df-tecnologias-fab .df-tf-header p { margin-left: auto; margin-right: auto; }
 .df-home #df-materiales .df-mat-header p { margin-left: 0; }
 .df-home #df-tecnologias-fab .df-tf-img-overlay { background: linear-gradient(0deg,rgba(21,34,47,.18),transparent); }
-.df-home #df-tecnologias-fab .df-tf-img-overlay::after { content: none; }
+.df-home #df-tecnologias-fab .df-tf-img-overlay::after { content: ""; height: 2px; }
 .df-home #df-tecnologias-fab .df-tf-body { padding: 32px; }
 .df-home #df-tecnologias-fab .df-tf-body p { color: #bac6d0; }
 .df-home #df-tecnologias-fab .df-tf-btn { border-radius: 8px; border-color: #738190; box-shadow: none; }
-.df-home #df-materiales { background: #f4f6f8; padding-left: 40px; padding-right: 40px; }
+.df-home #df-materiales { background: #fff; padding-left: 40px; padding-right: 40px; }
 .df-home #df-materiales .df-mat-panel { border: 1px solid var(--home-line); border-radius: 16px; box-shadow: 0 8px 24px rgba(24,42,62,.025); }
 .df-home #df-materiales .df-mat-img { border-radius: 12px; box-shadow: none; }
 .df-home #df-materiales .df-chip { border-radius: 7px; box-shadow: none; }
@@ -337,8 +272,10 @@ body.df-home.df-header-active { padding-top: 0 !important; }
 .df-home #df-materiales .df-mat-title { letter-spacing: -.035em; }
 .df-home #df-nuestras-tech { background: #fff; padding-left: 40px; padding-right: 40px; }
 .df-home #df-nuestras-tech .df-clientes-header { text-align: center; }
-.df-home #df-nuestras-tech .df-logo-card { border: 1px solid var(--home-line); border-radius: 12px; box-shadow: none; }
-.df-home #df-nuestras-tech .df-logo-card:hover { transform: translateY(-3px); border-color: #b8c3ce; box-shadow: 0 6px 18px rgba(24,42,62,.05); }
+.df-home #df-nuestras-tech .df-logo-card { border: 1px solid var(--home-line); border-radius: 12px; box-shadow: none; transition: transform .48s cubic-bezier(.2,.7,.25,1),box-shadow .48s,border-color .48s; }
+.df-home #df-nuestras-tech .df-logo-card:hover { transform: translateY(-4px); border-color: #b8c3ce; box-shadow: 0 6px 18px rgba(24,42,62,.05); }
+.df-home #df-nuestras-tech .df-logo-img { transition: transform .55s cubic-bezier(.2,.7,.25,1); }
+.df-home #df-nuestras-tech .df-logo-card:hover .df-logo-img { transform: scale(1.035); }
 .df-home #df-cta-contact { margin: 0 32px 60px; padding: 64px 48px; border: 1px solid var(--home-line); border-radius: 22px; background: #eff3f5; }
 .df-home #df-cta-contact h2 { color: var(--home-ink); }
 .df-home #df-cta-contact .df-cta-text p { color: var(--home-muted); }
@@ -350,14 +287,6 @@ body.df-home.df-header-active { padding-top: 0 !important; }
 .df-home #df-cta-contact .df-cta-note { color: var(--home-muted); }
 .df-home #df-cta-contact .df-cta-btn { box-shadow: none; border-radius: 10px; background: var(--home-action); }
 .df-home #df-cta-contact .df-cta-btn::before { content: none; }
-.df-home #df-footer { background: #13202d; padding-top: 72px; }
-.df-home #df-footer .df-ft-brand-bar { background: var(--home-orange); height: 2px; }
-.df-home #df-footer .df-ft-legal a,
-.df-home #df-footer .df-ft-tagline,
-.df-home #df-footer .df-ft-copy,
-.df-home #df-footer .df-ft-badges span,
-.df-home #df-footer .df-ft-col ul li a,
-.df-home #df-footer .df-ft-col ul li span { color: #b7c2cd; }
 .df-home .df-reveal { animation: df-home-reveal .5s cubic-bezier(.2,.65,.3,1) both; }
 @keyframes df-home-reveal { from { opacity: .6; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
@@ -365,32 +294,18 @@ body.df-home.df-header-active { padding-top: 0 !important; }
   .df-home #df-home-hero { min-height: 900px !important; padding-top: 245px !important; }
   .df-home .df-machine-stage { top: 205px; }
 }
-@media (max-width: 1199px) {
-  .df-home #df-header nav { display: none; }
-  .df-home #df-header .df-cta { display: flex !important; }
-  .df-home #df-header .df-hamburger { display: flex; margin-left: 0; }
-  .df-home #df-header .df-inner { gap: 18px; }
-}
 @media (max-width: 1100px) {
-  .df-home #df-home-hero { padding: 155px 40px 68px !important; min-height: 0 !important; }
+  .df-home #df-home-hero { padding: 155px 40px 150px !important; min-height: 0 !important; }
   .df-home #df-home-hero .WhitePaperCta_layout__s91ex { width: 100%; max-width: 650px; }
   .df-home #df-hero-title-injected h1 { font-size: 54px; }
   .df-home .df-hero-summary { max-width: 510px; }
   .df-home .df-machine-stage { position: relative; top: auto; right: auto; width: 92%; margin: 0 -10px -16px auto; }
-  .df-home #df-sectors-section { width: calc(100% - 48px); margin-top: -48px; }
+  .df-home #df-sectors-section { width: calc(100% - 48px); margin-top: -126px; }
   .df-home #df-sectors-section .df-sectors-grid { display: flex; overflow-x: auto; padding-bottom: 12px; scrollbar-width: thin; scrollbar-color: #b7c1ca transparent; }
   .df-home #df-sectors-section .df-sector-card { flex: 0 0 130px; }
 }
 @media (max-width: 767px) {
-  .df-home #df-header { top: 12px; left: 12px; right: 12px; height: 64px; border-radius: 15px; }
-  .df-home #df-header .df-inner { padding: 0 12px; gap: 8px; }
-  .df-home #df-header .df-logo-img { height: 41px; }
-  .df-home #df-header .df-logo-brand-text { font-size: 20px; margin-left: 5px; letter-spacing: -1px; }
-  .df-home #df-header .df-cta-btn { min-height: 38px; padding: 10px 12px; font-size: 10px; border-radius: 8px; }
-  .df-home #df-header .df-cta-btn svg { display: none; }
-  .df-home #df-header .df-hamburger { width: 32px; min-width: 32px; margin-left: 0; }
-  .df-home #df-mobile-drawer { top: 86px; left: 12px; right: 12px; max-height: calc(100dvh - 100px); }
-  .df-home #df-home-hero { padding: 128px 24px 40px !important; }
+  .df-home #df-home-hero { padding: 128px 24px 136px !important; }
   .df-home #df-hero-title-injected h1 { font-size: clamp(32px,9.1vw,51px); line-height: 1.15; letter-spacing: -.045em; }
   .df-home .df-hero-kicker { font-size: 9px; margin-bottom: 20px; gap: 15px; letter-spacing: .16em; }
   .df-home .df-hero-kicker::after { width: 30px; }
@@ -405,7 +320,7 @@ body.df-home.df-header-active { padding-top: 0 !important; }
   .df-home .df-machine-detail-label { font-size: 11px; }
   .df-home .df-machine-detail-text { font-size: 10px; }
   .df-home .df-machine-point span { width: 18px; height: 18px; font-size: 14px; box-shadow: 0 0 0 3px rgba(232,82,26,.12); }
-  .df-home #df-sectors-section { margin-top: -16px; width: calc(100% - 32px); border-radius: 15px; }
+  .df-home #df-sectors-section { margin-top: -108px; margin-bottom: 40px; width: calc(100% - 32px); border-radius: 15px; }
   .df-home #df-sectors-section .df-sectors-inner { padding: 21px 8px 8px; }
   .df-home #df-sectors-section .df-sectors-label { font-size: 8px; margin-bottom: 18px; }
   .df-home #df-sectors-section .df-sector-card { flex-basis: 108px; gap: 12px; }
@@ -421,16 +336,12 @@ body.df-home.df-header-active { padding-top: 0 !important; }
   .df-home #df-tecnologias-fab .df-tf-body { padding: 24px; }
   .df-home #df-cta-contact { margin: 0 16px 40px; padding: 40px 24px; border-radius: 16px; }
   .df-home #df-cta-contact .df-cta-inner { gap: 32px; }
-  .df-home #df-footer { padding: 56px 24px 28px; }
 }
 @media (max-width: 360px) {
-  .df-home #df-header .df-logo-brand-text { font-size: 17px; }
-  .df-home #df-header .df-logo-img { height: 35px; }
-  .df-home #df-header .df-cta-btn { padding: 10px 8px; font-size: 9px; }
   .df-home #df-home-hero { padding-left: 20px !important; padding-right: 20px !important; }
   .df-home #df-home-hero a.df-hero-cta { font-size: 10px; padding: 12px 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .df-home *, .df-home *::before, .df-home *::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
-  .df-home .df-machine-object { transform: none !important; }
+  .df-home .df-machine-rig, .df-home .df-machine-shadow { transform: none !important; }
 }

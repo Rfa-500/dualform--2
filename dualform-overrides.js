@@ -71,9 +71,6 @@
     arrow:   '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>'
   };
 
-  function markHeroReady() {
-    document.body.classList.add('df-hero-ready');
-  }
 
   /* ─────────────────────────────────────────────────────────
      1. DROPDOWN HOVER — JS reinforcement (CSS does most work)
@@ -94,37 +91,8 @@
   }
 
   /* ─────────────────────────────────────────────────────────
-     2. HERO — Add Spanish title + translate buttons
+     2. HERO — Content and CTA links are now in index.html
   ───────────────────────────────────────────────────────── */
-  function injectHeroTitle() {
-    if (document.getElementById('df-hero-title-injected')) return;
-    var layout = document.querySelector('.WhitePaperCta_layout__s91ex');
-    if (!layout) return;
-    var titleEl = document.createElement('div');
-    titleEl.id = 'df-hero-title-injected';
-    titleEl.innerHTML = '<p class="df-hero-kicker">Manufactura avanzada</p>'
-      + '<h1><span>Manufactura 3D</span> e inyección plástica <span class="df-hero-title-tail">para empresas</span></h1>'
-      + '<p class="df-hero-summary">Soluciones de manufactura aditiva e inyección para cada etapa de tu proyecto.</p>';
-    layout.insertBefore(titleEl, layout.firstChild);
-  }
-
-  function translateHeroButtons() {
-    document.querySelectorAll('.WhitePaperCta_layout__s91ex a').forEach(function(a) {
-      var sp = a.querySelector('span');
-      var txt = (sp || a).textContent.trim();
-      if (/explore\s+3d\s+printers/i.test(txt)) {
-        (sp || a).textContent = 'Explorar servicios';
-        a.href = '#servicios-principales';
-        a.removeAttribute('target');
-        a.classList.add('df-hero-cta', 'df-hero-cta-primary');
-      } else if (/contact\s+sales/i.test(txt)) {
-        (sp || a).textContent = 'Solicitar cotización';
-        a.href = getSiteRoot() + 'contacto/';
-        a.classList.add('df-hero-cta', 'df-hero-cta-secondary');
-      }
-    });
-  }
-
   /* ─────────────────────────────────────────────────────────
      3. SECTOR CARDS — New 7-card uniform section
         Replaces legacy LinksSection tiles entirely
@@ -402,8 +370,8 @@
     var anchor = document.getElementById('df-servicios-section');
 
     var cards = [
-      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/Resources-Img-Vid/home/printer-p1s.webp', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
-      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/Resources-Img-Vid/home/machine-1280.webp', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
+      { title:'Impresión 3D', desc:'Fabricación de prototipos, piezas funcionales y componentes personalizados mediante tecnologías de alta precisión.', adv:['Ideal para prototipado rápido','Bajo costo de entrada','Geometrías complejas sin molde','Producción flexible y personalizada'], img:'/Resources-Img-Vid/home/printer-grid.webp', icon:ICON.printer, href:getSiteRoot() + 'impresion-3d/' },
+      { title:'Inyección de Plástico', desc:'Producción de piezas plásticas para bajo o alto volumen mediante procesos de moldeo e inyección con acabados superiores.', adv:['Ideal para producción repetitiva','Excelente acabado superficial','Escalable para alto volumen','Compatible con múltiples materiales'], img:'/Resources-Img-Vid/home/machine-grid.webp', icon:ICON.layers, href:getSiteRoot() + 'inyeccion-de-plastico/' }
     ];
 
     var cardsHTML = cards.map(function(c) {
@@ -627,8 +595,23 @@
       var track = document.getElementById('df-logos-track');
       if (!track) return;
       var isPaused = false;
+      var isTouching = false;
+      var touchTimer;
+      track.addEventListener('touchstart', function() { clearTimeout(touchTimer); isTouching = true; velocity = 0; }, { passive: true });
+      function finishTouch() { touchTimer = setTimeout(function() { isTouching = false; lastTime = null; }, 1200); }
+      track.addEventListener('touchend', finishTouch, { passive: true });
+      track.addEventListener('touchcancel', finishTouch, { passive: true });
       var lastTime = null;
       var speed = 36; // pixels per second
+      var velocity = 0;
+      var position = track.scrollLeft;
+      var rendered = position;
+      var loopWidth = 0;
+      function measureLoop() {
+        loopWidth = track.children[LOGOS.length].offsetLeft - track.children[0].offsetLeft;
+      }
+      measureLoop();
+      window.addEventListener('resize', measureLoop);
 
       track.querySelectorAll('.df-logo-card').forEach(function(card) {
         card.addEventListener('mouseenter', function() { isPaused = true; });
@@ -640,12 +623,15 @@
         var delta = Math.min(timestamp - lastTime, 32);
         lastTime = timestamp;
 
-        if (!isPaused) {
-          track.scrollLeft += (speed * delta) / 1000;
-          if (track.scrollLeft >= track.scrollWidth / 2) {
-            track.scrollLeft -= track.scrollWidth / 2;
-          }
-        }
+        // Keep fractional position: scrollLeft rounds, so incremental writes jitter.
+        if (Math.abs(track.scrollLeft - rendered) > 1) position = track.scrollLeft;
+        var target = isPaused || isTouching ? 0 : speed;
+        velocity += (target - velocity) * (1 - Math.exp(-delta / 110));
+        if (Math.abs(target - velocity) < .1) velocity = target;
+        position += velocity * delta / 1000;
+        if (loopWidth && position >= loopWidth) position -= loopWidth;
+        track.scrollLeft = position;
+        rendered = track.scrollLeft;
       }
       animateVisible(track, scrollLogos);
     }, 700);
@@ -849,9 +835,6 @@
   ───────────────────────────────────────────────────────── */
   function run() {
     fixDropdowns();
-    injectHeroTitle();
-    translateHeroButtons();
-    markHeroReady();
     deactivateIndustryCards();
     injectSectorsSection();
     hideLegacySections();
@@ -874,9 +857,6 @@
   [300, 800, 1500, 3000].forEach(function(ms) {
     setTimeout(function() {
       sweepLegacy();
-      injectHeroTitle();
-      translateHeroButtons();
-      markHeroReady();
       injectSectorsSection();
     }, ms);
   });

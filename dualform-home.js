@@ -3,12 +3,6 @@
   'use strict';
   if (!document.body.classList.contains('df-home')) return;
 
-  var ctaIcon = document.querySelector('#df-cta-main svg');
-  if (ctaIcon) {
-    ctaIcon.innerHTML = '<path d="M5 12h14m-5-5 5 5-5 5"/>';
-    ctaIcon.setAttribute('aria-hidden', 'true');
-  }
-
   var stage = document.getElementById('df-machine-stage');
   var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -29,7 +23,15 @@
       control: ['Panel de control', 'La interfaz de operación de la máquina.'],
       injection: ['Unidad de inyección', 'El conjunto que alimenta el molde.']
     };
-    controls.hidden = false;
+    // Keep the original image as the fallback until every articulated layer can render.
+    var layerImages = Array.from(stage.querySelectorAll('.df-machine-rig img'));
+    var texture = new Image();
+    texture.src = stage.querySelector('.df-machine-panel image').getAttribute('href');
+    layerImages.push(texture);
+    Promise.all(layerImages.map(function (img) { return img.decode(); })).then(function () {
+      stage.classList.add('df-parts-ready');
+      controls.hidden = false;
+    }).catch(function () { /* Static, complete machine remains usable if a layer fails. */ });
 
     function show(part) {
       if (!part) {
@@ -43,6 +45,7 @@
       }
       points.forEach(function (button) {
         button.setAttribute('aria-expanded', String(button.dataset.part === part));
+        button.setAttribute('aria-pressed', String(button.dataset.part === part));
       });
     }
     points.forEach(function (button) {
@@ -73,24 +76,24 @@
     function resetMotion() {
       cancelAnimationFrame(frameId);
       frameId = 0;
-      object.style.removeProperty('--machine-x');
-      object.style.removeProperty('--machine-y');
-      object.style.removeProperty('--machine-ry');
+      ['--machine-rx','--machine-ry','--shadow-x','--shadow-scale','--machine-light-angle'].forEach(function (name) { object.style.removeProperty(name); });
     }
     function renderMotion() {
-      object.style.setProperty('--machine-x', (latestX * 6).toFixed(2) + 'px');
-      object.style.setProperty('--machine-y', (latestY * 3).toFixed(2) + 'px');
-      object.style.setProperty('--machine-ry', (latestX * .65).toFixed(2) + 'deg');
+      object.style.setProperty('--machine-rx', (-latestY * 1.8).toFixed(2) + 'deg');
+      object.style.setProperty('--machine-ry', (latestX * 2.8).toFixed(2) + 'deg');
+      object.style.setProperty('--shadow-x', (-latestX * 7).toFixed(2) + 'px');
+      object.style.setProperty('--shadow-scale', (1 - Math.abs(latestX) * .035).toFixed(3));
+      object.style.setProperty('--machine-light-angle', (100 + latestX * 25).toFixed(1) + 'deg');
       frameId = 0;
     }
-    hero.addEventListener('pointermove', function (event) {
+    stage.addEventListener('pointermove', function (event) {
       if (motion.matches || !pointer.matches || event.pointerType === 'touch') return;
-      var bounds = hero.getBoundingClientRect();
+      var bounds = stage.getBoundingClientRect();
       latestX = Math.max(-1, Math.min(1, ((event.clientX - bounds.left) / bounds.width - .5) * 2));
       latestY = Math.max(-1, Math.min(1, ((event.clientY - bounds.top) / bounds.height - .5) * 2));
       if (!frameId) frameId = requestAnimationFrame(renderMotion);
     }, { passive: true });
-    hero.addEventListener('pointerleave', resetMotion);
+    stage.addEventListener('pointerleave', resetMotion);
     motion.addEventListener('change', resetMotion);
     pointer.addEventListener('change', resetMotion);
     document.addEventListener('visibilitychange', function () { if (document.hidden) resetMotion(); });
